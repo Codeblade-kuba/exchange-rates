@@ -2,7 +2,9 @@ import AddToFavorite from './AddToFavorite';
 
 const ExchangeRateCard = (props) => {
   return (
-    <div className={'exchange-rate-card ' + (props.favorite ? 'favorite' : '')}>
+    <div
+      className={'exchange-rate-card ' + (props.isFavorite ? 'favorite' : '')}
+    >
       <header>
         <AddToFavorite symbol={props.symbol} />
         <h4>{props.name}</h4>

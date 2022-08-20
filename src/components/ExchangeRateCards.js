@@ -7,38 +7,29 @@ const API_URL = 'https://api.frankfurter.app';
 
 const ExchangeRateCards = () => {
   const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
+  const [exchangeRelativeParam, setExchangeRelativeParam] = useState('EUR');
   const [favorites, setFavorites] = useState([]);
 
-  useEffect(() => updateDisplayedCurrencies(), [favorites]);
+  useEffect(
+    () => updateDisplayedCurrencies(),
+    [exchangeRelativeParam, favorites]
+  );
 
   function updateDisplayedCurrencies() {
     getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
   }
 
-  const getCuerrencies = () => {
-    const currencyNames = getCurrencyNames();
-    const latestExchangeRates = getLatestExchangeRates();
-
-    return Promise.all([latestExchangeRates, currencyNames]).then(
-      ([latestExchangeRates, currencyNames]) => {
-        let resultCurrenciesArray = [];
-        Object.keys(latestExchangeRates).forEach((symbol) => {
-          resultCurrenciesArray.push({
-            symbol,
-            name: currencyNames[symbol],
-            rate: latestExchangeRates[symbol],
-            favorite: favorites.includes(symbol),
-          });
-        });
-        return resultCurrenciesArray;
-      }
-    );
+  const getCurrencies = () => {
+    const currencies = getRawCurrenciesObject()
+      .then((response) => response.json())
+      .then((response) => convertCurrenciesObjectToArray(response))
+      .then((response) => updateCurrenciesWithExchangeRates(response))
+      .then((response) => updateCurrenciesFavoriteStatus(response));
+    return currencies;
   };
 
-  const getCurrencies = () => {
-    return fetch(API_URL + '/currencies')
-      .then((response) => response.json())
-      .then((response) => convertCurrenciesObjectToArray(response));
+  const getRawCurrenciesObject = () => {
+    return fetch(buildAPIURL('/currencies'));
   };
 
   const convertCurrenciesObjectToArray = (currenciesObject) => {
@@ -52,22 +43,53 @@ const ExchangeRateCards = () => {
     return currenciesArray;
   };
 
+  const updateCurrenciesWithExchangeRates = (currencies) => {
+    return getLatestExchangeRates().then((latestExchangeRates) => {
+      currencies.forEach((currency) => {
+        currency.rate = latestExchangeRates[currency.symbol];
+      });
+      return currencies;
+    });
+  };
+
+  const updateCurrenciesFavoriteStatus = (currencies) => {
+    currencies.forEach((currency) => {
+      currency.isFavorite = favorites.includes(currency.symbol);
+    });
+    return currencies;
+  };
+
   const getLatestExchangeRates = () => {
-    return fetch(API_URL + '/latest')
+    return fetch(buildAPIURL('/latest'))
       .then((response) => response.json())
       .then((response) => response.rates);
   };
 
+  function buildAPIURL(URI) {
+    return API_URL + URI + '?from=' + exchangeRelativeParam;
+  }
+
   return (
     <div>
+      <select
+        name=""
+        id=""
+        onChange={(e) => setExchangeRelativeParam(e.target.value)}
+      >
+        {displayedCurrencies.map((currency, index) => (
+          <option value={currency.symbol} key={index}>
+            {currency.name}
+          </option>
+        ))}
+      </select>
       <ExchangeRateCardsContext.Provider value={{ favorites, setFavorites }}>
-        {displayedCurrencies.map((currency, key) => (
+        {displayedCurrencies.map((currency, index) => (
           <ExchangeRateCard
-            key={key}
+            key={index}
             symbol={currency.symbol}
             name={currency.name}
             rate={currency.rate}
-            favorite={currency.favorite}
+            isFavorite={currency.isFavorite}
           />
         ))}
       </ExchangeRateCardsContext.Provider>
