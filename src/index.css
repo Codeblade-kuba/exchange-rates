@@ -11,3 +11,7 @@
 .exchange-rate-card.favorite {
   border-color: red;
 }
+
+nav {
+  border-bottom: 1px solid green;
+}
