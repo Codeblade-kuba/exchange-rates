@@ -15,7 +15,7 @@ const ExchangeRelativeSelect = () => {
     >
       {displayedCurrencies.map((currency, index) => (
         <option value={currency.symbol} key={index}>
-          {currency.name}
+          {currency.symbol}
         </option>
       ))}
     </select>

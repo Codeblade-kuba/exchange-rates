@@ -12,23 +12,21 @@ const App = () => {
   const [exchangeDateParam, setExchangeDateParam] = useState('latest');
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [decimalPlaces, setDecimalPlaces] = useState(5);
 
   useEffect(
     () => updateDisplayedCurrencies(),
-    [exchangeRelativeParam, exchangeDateParam, showFavorites, favorites]
+    [
+      exchangeRelativeParam,
+      exchangeDateParam,
+      showFavorites,
+      favorites,
+      decimalPlaces,
+    ]
   );
 
   function updateDisplayedCurrencies() {
-    if (showFavorites) {
-      getCurrencies()
-        .then((currencies) =>
-          currencies.filter((currency) => currency.isFavorite)
-        )
-        .then((currencies) => setDisplayedCurrencies(currencies));
-      getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
-    } else {
-      getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
-    }
+    getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
   }
 
   const getCurrencies = () => {
@@ -36,7 +34,13 @@ const App = () => {
       .then((response) => response.json())
       .then((response) => convertCurrenciesObjectToArray(response))
       .then((response) => updateCurrenciesWithExchangeRates(response))
-      .then((response) => updateCurrenciesFavoriteStatus(response));
+      .then((response) => updateCurrenciesFavoriteStatus(response))
+      .then((response) => {
+        if (showFavorites) {
+          return response.filter((currency) => currency.isFavorite);
+        }
+        return response;
+      });
     return currencies;
   };
 
@@ -58,7 +62,12 @@ const App = () => {
   const updateCurrenciesWithExchangeRates = (currencies) => {
     return getLatestExchangeRates().then((latestExchangeRates) => {
       currencies.forEach((currency) => {
-        currency.rate = latestExchangeRates[currency.symbol];
+        let exchangeRate = latestExchangeRates[currency.symbol];
+        if (typeof exchangeRate !== 'number') return currency;
+
+        exchangeRate = exchangeRate.toFixed(decimalPlaces);
+        currency.rate = exchangeRate;
+        return currency;
       });
       return currencies;
     });
@@ -95,9 +104,10 @@ const App = () => {
         setFavorites,
         showFavorites,
         setShowFavorites,
+        decimalPlaces,
+        setDecimalPlaces,
       }}
     >
-      {console.log(showFavorites)}
       <Home></Home>
     </ExchangeRateCardsContext.Provider>
   );

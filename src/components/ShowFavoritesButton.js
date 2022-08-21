@@ -8,8 +8,8 @@ const ShowFavoritesButton = () => {
   );
 
   return (
-    <button onClick={() => setShowFavorites(!showFavorites)}>
-      Show favorites
+    <button onClick={() => setShowFavorites((prev) => !prev)}>
+      {(showFavorites ? 'Hide' : 'Show') + ' favorites'}
     </button>
   );
 };
