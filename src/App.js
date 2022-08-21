@@ -1,29 +1,10 @@
 import { useState, useEffect } from 'react';
 
 import { ExchangeRateCardsContext } from './contexts/ExchangeRateCardsContext';
+import { API_URL } from './data/constants';
+import { shuffle } from './utils/shuffle';
 
 import Home from './pages/Home';
-
-const API_URL = 'https://api.frankfurter.app';
-
-function shuffle(array) {
-  var m = array.length,
-    t,
-    i;
-
-  // While there remain elements to shuffle…
-  while (m) {
-    // Pick a remaining element…
-    i = Math.floor(Math.random() * m--);
-
-    // And swap it with the current element.
-    t = array[m];
-    array[m] = array[i];
-    array[i] = t;
-  }
-
-  return array;
-}
 
 const App = () => {
   const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
@@ -46,18 +27,15 @@ const App = () => {
     setReset(false);
   }, [reset]);
 
-  useEffect(
-    () => updateDisplayedCurrencies(),
-    [
-      exchangeRelativeParam,
-      exchangeDateParam,
-      showFavorites,
-      favorites,
-      decimalPlaces,
-      sortingMethod,
-      reset,
-    ]
-  );
+  useEffect(updateDisplayedCurrencies, [
+    exchangeRelativeParam,
+    exchangeDateParam,
+    showFavorites,
+    favorites,
+    decimalPlaces,
+    sortingMethod,
+    reset,
+  ]);
 
   function updateDisplayedCurrencies() {
     getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
@@ -135,6 +113,7 @@ const App = () => {
   };
 
   const buildAPIURL = (URI) => {
+    console.log(URI);
     const res = API_URL + '/' + URI + '?from=' + exchangeRelativeParam;
     return res;
   };

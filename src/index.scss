@@ -8,8 +8,10 @@
   border: 1px solid blue;
 }
 
+$red: pink;
+
 .exchange-rate-card.favorite {
-  border-color: red;
+  border-color: $red;
 }
 
 nav {
