@@ -6,6 +6,25 @@ import Home from './pages/Home';
 
 const API_URL = 'https://api.frankfurter.app';
 
+function shuffle(array) {
+  var m = array.length,
+    t,
+    i;
+
+  // While there remain elements to shuffle…
+  while (m) {
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  }
+
+  return array;
+}
+
 const App = () => {
   const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
   const [exchangeRelativeParam, setExchangeRelativeParam] = useState('EUR');
@@ -13,6 +32,19 @@ const App = () => {
   const [favorites, setFavorites] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
   const [decimalPlaces, setDecimalPlaces] = useState(5);
+  const [sortingMethod, setSortingMethod] = useState('default');
+  const [reset, setReset] = useState(false);
+
+  useEffect(() => {
+    setDisplayedCurrencies([]);
+    setExchangeRelativeParam('EUR');
+    setExchangeDateParam('latest');
+    setFavorites([]);
+    setShowFavorites(false);
+    setDecimalPlaces(5);
+    setSortingMethod('default');
+    setReset(false);
+  }, [reset]);
 
   useEffect(
     () => updateDisplayedCurrencies(),
@@ -22,6 +54,8 @@ const App = () => {
       showFavorites,
       favorites,
       decimalPlaces,
+      sortingMethod,
+      reset,
     ]
   );
 
@@ -40,7 +74,8 @@ const App = () => {
           return response.filter((currency) => currency.isFavorite);
         }
         return response;
-      });
+      })
+      .then((response) => sortCurrencies(response));
     return currencies;
   };
 
@@ -80,6 +115,19 @@ const App = () => {
     return currencies;
   };
 
+  const sortCurrencies = (currencies) => {
+    switch (sortingMethod) {
+      case 'alphabetically':
+        return currencies.sort((a, b) =>
+          a.name > b.name ? 1 : b.name > a.name ? -1 : 0
+        );
+      case 'random':
+        return shuffle(currencies);
+      default:
+        return currencies;
+    }
+  };
+
   const getLatestExchangeRates = () => {
     return fetch(buildAPIURL(exchangeDateParam))
       .then((response) => response.json())
@@ -106,6 +154,9 @@ const App = () => {
         setShowFavorites,
         decimalPlaces,
         setDecimalPlaces,
+        sortingMethod,
+        setSortingMethod,
+        setReset,
       }}
     >
       <Home></Home>
