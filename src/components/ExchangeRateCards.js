@@ -4,11 +4,11 @@ import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
 import ExchangeRateCard from './ExchangeRateCard';
 
 const ExchangeRateCards = () => {
-  const { currencies } = useContext(ExchangeRateCardsContext);
+  const { displayedCurrencies } = useContext(ExchangeRateCardsContext);
 
   return (
     <div>
-      {currencies.map((currency, index) => (
+      {displayedCurrencies.map((currency, index) => (
         <ExchangeRateCard
           key={index}
           symbol={currency.symbol}

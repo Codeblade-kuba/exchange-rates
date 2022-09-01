@@ -6,40 +6,49 @@ import { shuffle } from './utils/shuffle';
 
 import Home from './pages/Home';
 
-const appStateDefaults = {
-  exchangeRelativeParam: 'EUR',
-  exchangeDateParam: 'latest',
-  favorites: [],
-  showFavorites: false,
-  decimalPlaces: 5,
-  sortingMethod: 'default',
-  reset: false,
-};
-
 const App = () => {
-  const [appState, setAppState] = useState({ ...appStateDefaults });
-  const [currencies, setCurrencies] = useState([]);
+  const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
+  const [exchangeRelativeParam, setExchangeRelativeParam] = useState('EUR');
+  const [exchangeDateParam, setExchangeDateParam] = useState('latest');
+  const [favorites, setFavorites] = useState([]);
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [decimalPlaces, setDecimalPlaces] = useState(5);
+  const [sortingMethod, setSortingMethod] = useState('default');
+  const [reset, setReset] = useState(false);
 
   useEffect(() => {
-    setAppState({ ...appStateDefaults });
-  }, [appState.reset]);
+    setDisplayedCurrencies([]);
+    setExchangeRelativeParam('EUR');
+    setExchangeDateParam('latest');
+    setFavorites([]);
+    setShowFavorites(false);
+    setDecimalPlaces(5);
+    setSortingMethod('default');
+    setReset(false);
+  }, [reset]);
 
-  useEffect(() => {
-    console.log('appStateUpdated');
-    updateCurrencies();
-  }, [appState]);
+  useEffect(updateDisplayedCurrencies, [
+    exchangeRelativeParam,
+    exchangeDateParam,
+    showFavorites,
+    favorites,
+    decimalPlaces,
+    sortingMethod,
+    reset,
+  ]);
 
-  const updateCurrencies = () => {
-    getCurrencies().then((currencies) => setCurrencies(currencies));
-  };
+  function updateDisplayedCurrencies() {
+    getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
+  }
 
   const getCurrencies = () => {
-    const currencies = getRawJSONCurrenciesObject()
+    const currencies = getRawCurrenciesObject()
+      .then((response) => response.json())
       .then((response) => convertCurrenciesObjectToArray(response))
       .then((response) => updateCurrenciesWithExchangeRates(response))
       .then((response) => updateCurrenciesFavoriteStatus(response))
       .then((response) => {
-        if (appState.showFavorites) {
+        if (showFavorites) {
           return response.filter((currency) => currency.isFavorite);
         }
         return response;
@@ -48,10 +57,8 @@ const App = () => {
     return currencies;
   };
 
-  const getRawJSONCurrenciesObject = () => {
-    return fetch(buildAPIURL('currencies')).then((currencies) =>
-      currencies.json()
-    );
+  const getRawCurrenciesObject = () => {
+    return fetch(buildAPIURL('currencies'));
   };
 
   const convertCurrenciesObjectToArray = (currenciesObject) => {
@@ -71,7 +78,7 @@ const App = () => {
         let exchangeRate = latestExchangeRates[currency.symbol];
         if (typeof exchangeRate !== 'number') return currency;
 
-        exchangeRate = exchangeRate.toFixed(appState.decimalPlaces);
+        exchangeRate = exchangeRate.toFixed(decimalPlaces);
         currency.rate = exchangeRate;
         return currency;
       });
@@ -81,13 +88,13 @@ const App = () => {
 
   const updateCurrenciesFavoriteStatus = (currencies) => {
     currencies.forEach((currency) => {
-      currency.isFavorite = appState.favorites.includes(currency.symbol);
+      currency.isFavorite = favorites.includes(currency.symbol);
     });
     return currencies;
   };
 
   const sortCurrencies = (currencies) => {
-    switch (appState.sortingMethod) {
+    switch (sortingMethod) {
       case 'alphabetically':
         return currencies.sort((a, b) =>
           a.name > b.name ? 1 : b.name > a.name ? -1 : 0
@@ -100,19 +107,37 @@ const App = () => {
   };
 
   const getLatestExchangeRates = () => {
-    return fetch(buildAPIURL(appState.exchangeDateParam))
+    return fetch(buildAPIURL(exchangeDateParam))
       .then((response) => response.json())
       .then((response) => response.rates);
   };
 
   const buildAPIURL = (URI) => {
     console.log(URI);
-    const res = API_URL + '/' + URI + '?from=' + appState.exchangeRelativeParam;
+    const res = API_URL + '/' + URI + '?from=' + exchangeRelativeParam;
     return res;
   };
 
   return (
-    <ExchangeRateCardsContext.Provider value={{ appState, currencies }}>
+    <ExchangeRateCardsContext.Provider
+      value={{
+        displayedCurrencies,
+        setDisplayedCurrencies,
+        exchangeRelativeParam,
+        setExchangeRelativeParam,
+        exchangeDateParam,
+        setExchangeDateParam,
+        favorites,
+        setFavorites,
+        showFavorites,
+        setShowFavorites,
+        decimalPlaces,
+        setDecimalPlaces,
+        sortingMethod,
+        setSortingMethod,
+        setReset,
+      }}
+    >
       <Home></Home>
     </ExchangeRateCardsContext.Provider>
   );
