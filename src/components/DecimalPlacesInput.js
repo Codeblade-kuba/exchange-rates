@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const DecimalPlacesInput = () => {
-  const { decimalPlaces, setDecimalPlaces } = useContext(
-    ExchangeRateCardsContext
-  );
+  const { appState, setAppState } = useContext(AppContext);
 
   const decimalPlacesOptions = [0, 1, 2, 3, 4, 5];
 
@@ -14,8 +12,10 @@ const DecimalPlacesInput = () => {
       <select
         name=""
         id=""
-        onChange={(e) => setDecimalPlaces(e.target.value)}
-        value={decimalPlaces}
+        onChange={(e) =>
+          setAppState((prev) => ({ ...prev, decimalPlaces: e.target.value }))
+        }
+        value={appState.decimalPlaces}
       >
         {decimalPlacesOptions.map((val, index) => (
           <option value={index} key={index}>

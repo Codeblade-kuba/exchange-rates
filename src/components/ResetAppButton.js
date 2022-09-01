@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const ResetAppButton = () => {
-  const { setReset } = useContext(ExchangeRateCardsContext);
+  const { setAppState } = useContext(AppContext);
 
-  return <button onClick={() => setReset(true)}>Reset</button>;
+  return <button onClick={() => setAppState(true)}>Reset</button>;
 };
 
 export default ResetAppButton;

@@ -1,20 +1,21 @@
 import React, { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const ExchangeRelativeSelect = () => {
-  const {
-    displayedCurrencies,
-    exchangeRelativeParam,
-    setExchangeRelativeParam,
-  } = useContext(ExchangeRateCardsContext);
+  const { appState, setAppState, displayedCurrencies } = useContext(AppContext);
 
   return (
     <select
       name="Exchange rate relative currency"
       id="exchange-relative-select"
-      value={exchangeRelativeParam}
-      onChange={(e) => setExchangeRelativeParam(e.target.value)}
+      value={appState.exchangeRelativeParam}
+      onChange={(e) =>
+        setAppState((prev) => ({
+          ...prev,
+          exchangeRelativeParam: e.target.value,
+        }))
+      }
     >
       {displayedCurrencies.map((currency, index) => (
         <option value={currency.symbol} key={index}>

@@ -1,12 +1,17 @@
 import React, { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const ExchangeDateInput = () => {
-  const { setExchangeDateParam } = useContext(ExchangeRateCardsContext);
+  const { setAppState } = useContext(AppContext);
 
   return (
-    <input type="date" onChange={(e) => setExchangeDateParam(e.target.value)} />
+    <input
+      type="date"
+      onChange={(e) =>
+        setAppState((prev) => ({ ...prev, exchangeDateParam: e.target.value }))
+      }
+    />
   );
 };
 

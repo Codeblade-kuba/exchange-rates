@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 import ExchangeRateCard from './ExchangeRateCard';
 
 const ExchangeRateCards = () => {
-  const { displayedCurrencies } = useContext(ExchangeRateCardsContext);
+  const { displayedCurrencies } = useContext(AppContext);
 
   return (
     <div>

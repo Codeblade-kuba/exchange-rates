@@ -1,19 +1,22 @@
 import { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const AddToFavorite = ({ symbol }) => {
-  const { favorites, setFavorites } = useContext(ExchangeRateCardsContext);
+  const { appState, setAppState } = useContext(AppContext);
 
   function addToFavorite() {
-    if (favorites.includes(symbol)) {
-      return setFavorites((prev) => {
-        const newArr = [...prev];
-        newArr.splice(prev.indexOf(symbol), 1);
-        return newArr;
+    if (appState.favorites.includes(symbol)) {
+      return setAppState((prev) => {
+        const newArr = [...prev.favorites];
+        newArr.splice(prev.favorites.indexOf(symbol), 1);
+        return { ...prev, favorites: newArr };
       });
     }
-    return setFavorites((current) => [...current, symbol]);
+    return setAppState((prev) => ({
+      ...prev,
+      favorites: [...prev.favorites, symbol],
+    }));
   }
 
   return (

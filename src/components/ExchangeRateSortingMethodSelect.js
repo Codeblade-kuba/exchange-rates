@@ -1,22 +1,22 @@
 import { useContext } from 'react';
 
-import { ExchangeRateCardsContext } from '../contexts/ExchangeRateCardsContext';
+import { AppContext } from '../contexts/appContext';
 
 const ExchangeRateSortingMethodSelect = () => {
-  const { sortingMethod, setSortingMethod } = useContext(
-    ExchangeRateCardsContext
-  );
+  const { appState, setAppState } = useContext(AppContext);
 
-  const decimalPlacesOptions = ['default', 'alphabetically', 'random'];
+  const sortingMethods = ['default', 'alphabetically', 'random'];
 
   return (
     <select
       name=""
       id=""
-      value={sortingMethod}
-      onChange={(e) => setSortingMethod(e.target.value)}
+      value={appState.sortingMethod}
+      onChange={(e) =>
+        setAppState((prev) => ({ ...prev, sortingMethod: e.target.value }))
+      }
     >
-      {decimalPlacesOptions.map((val, index) => (
+      {sortingMethods.map((val, index) => (
         <option value={val} key={index}>
           {val}
         </option>
