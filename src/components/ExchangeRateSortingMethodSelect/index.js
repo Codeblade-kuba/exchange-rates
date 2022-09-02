@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../contexts/appContext';
+import { AppContext } from '../../contexts/appContext';
 
 const ExchangeRateSortingMethodSelect = () => {
   const { appState, setAppState } = useContext(AppContext);

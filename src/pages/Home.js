@@ -4,7 +4,6 @@ import ExchangeRateCards from '../components/ExchangeRateCards';
 const Home = () => {
   return (
     <Layout>
-      <p>Home content goes here</p>
       <ExchangeRateCards></ExchangeRateCards>
     </Layout>
   );

@@ -2,30 +2,18 @@ import { useState, useEffect } from 'react';
 
 import { AppContext } from './contexts/appContext';
 import { API_URL } from './data/constants';
+import { appDefaultSettings } from './data/appDefaultSettings';
 import { shuffle } from './utils/shuffle';
 
 import Home from './pages/Home';
 
-const defaultAppState = {
-  exchangeRelativeParam: 'EUR',
-  exchangeDateParam: 'latest',
-  favorites: [],
-  decimalPlaces: 5,
-  sortingMethod: 'default',
-  showFavorites: false,
-  reset: false,
-};
-
 const App = () => {
-  const [appState, setAppState] = useState(defaultAppState);
+  const [appState, setAppState] = useState(appDefaultSettings);
   const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
 
-  useEffect(() => {
-    setDisplayedCurrencies([]);
-    setAppState(defaultAppState);
-  }, [appState.reset]);
+  useEffect(() => setAppState(appDefaultSettings), [appState.reset]);
 
-  useEffect(updateDisplayedCurrencies, [appState]);
+  useEffect(() => updateDisplayedCurrencies(), [appState]);
 
   function updateDisplayedCurrencies() {
     getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
@@ -103,6 +91,7 @@ const App = () => {
   };
 
   const buildAPIURL = (URI) => {
+    console.log(URI);
     const res = API_URL + '/' + URI + '?from=' + appState.exchangeRelativeParam;
     return res;
   };

@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../contexts/appContext';
+import { AppContext } from '../../contexts/appContext';
 import ExchangeRateCard from './ExchangeRateCard';
 
 const ExchangeRateCards = () => {

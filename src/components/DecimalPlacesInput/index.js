@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../contexts/appContext';
+import { AppContext } from '../../contexts/appContext';
 
 const DecimalPlacesInput = () => {
   const { appState, setAppState } = useContext(AppContext);
