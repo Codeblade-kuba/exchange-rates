@@ -1,106 +1,86 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import { AppContext } from './contexts/appContext';
 import { API_URL } from './data/constants';
 import { appDefaultSettings } from './data/appDefaultSettings';
-import { shuffle } from './utils/shuffle';
 
 import Home from './pages/Home';
 
 const App = () => {
   const [appState, setAppState] = useState(appDefaultSettings);
-  const [displayedCurrencies, setDisplayedCurrencies] = useState([]);
+  const [currencies, setCurrencies] = useState([]);
 
-  useEffect(() => setAppState(appDefaultSettings), [appState.reset]);
+  useEffect(() => {
+    setInitialCurrencies();
+  }, []);
 
-  useEffect(() => updateDisplayedCurrencies(), [appState]);
+  useEffect(() => {
+    updateCurrenciesExchangeRates();
+  }, [appState.exchangeRelativeParam, appState.exchangeDateParam]);
 
-  function updateDisplayedCurrencies() {
-    getCurrencies().then((currencies) => setDisplayedCurrencies(currencies));
-  }
-
-  const getCurrencies = () => {
-    const currencies = getRawCurrenciesObject()
-      .then((response) => response.json())
-      .then((response) => convertCurrenciesObjectToArray(response))
-      .then((response) => updateCurrenciesWithExchangeRates(response))
-      .then((response) => updateCurrenciesFavoriteStatus(response))
-      .then((response) => {
-        if (appState.showFavorites) {
-          return response.filter((currency) => currency.isFavorite);
-        }
-        return response;
-      })
-      .then((response) => sortCurrencies(response));
-    return currencies;
+  const setInitialCurrencies = async () => {
+    let currencies = await getCurrencies();
+    setCurrencies(currencies);
+    updateCurrenciesExchangeRates();
   };
 
-  const getRawCurrenciesObject = () => {
-    return fetch(buildAPIURL('currencies'));
+  const getCurrenciesExchangeRates = async () => {
+    let exchangeRates = await fetch(
+      buildAPIURL(appState.exchangeDateParam, appState.exchangeRelativeParam)
+    );
+    exchangeRates = await exchangeRates.json();
+    return exchangeRates.rates;
   };
 
-  const convertCurrenciesObjectToArray = (currenciesObject) => {
+  const updateCurrenciesExchangeRates = async () => {
+    let exchangeRates = await getCurrenciesExchangeRates();
+    if (!exchangeRates) return false;
+    setCurrencies((prev) => {
+      const _currencies = [...prev];
+      _currencies.forEach((currency) => {
+        let exchangeRate = exchangeRates[currency.symbol];
+        if (typeof exchangeRate !== 'number') return currency;
+        currency.rate = exchangeRate;
+        return currency;
+      });
+      return _currencies;
+    });
+  };
+
+  const getCurrencies = async () => {
+    const currencyNames = await getCurrencyNames();
+    return buildCurrenciesFromCurrencyNames(currencyNames);
+  };
+
+  const getCurrencyNames = async () => {
+    const currencyNames = await fetch(buildAPIURL('currencies'));
+    return currencyNames.json();
+  };
+
+  const buildCurrenciesFromCurrencyNames = (currenciesNames) => {
     const currenciesArray = [];
-    Object.keys(currenciesObject).forEach((symbol) => {
+    Object.keys(currenciesNames).forEach((symbol) => {
       currenciesArray.push({
         symbol,
-        name: currenciesObject[symbol],
+        name: currenciesNames[symbol],
       });
     });
     return currenciesArray;
   };
 
-  const updateCurrenciesWithExchangeRates = (currencies) => {
-    return getLatestExchangeRates().then((latestExchangeRates) => {
-      currencies.forEach((currency) => {
-        let exchangeRate = latestExchangeRates[currency.symbol];
-        if (typeof exchangeRate !== 'number') return currency;
-
-        exchangeRate = exchangeRate.toFixed(appState.decimalPlaces);
-        currency.rate = exchangeRate;
-        return currency;
-      });
-      return currencies;
-    });
-  };
-
-  const updateCurrenciesFavoriteStatus = (currencies) => {
-    currencies.forEach((currency) => {
-      currency.isFavorite = appState.favorites.includes(currency.symbol);
-    });
-    return currencies;
-  };
-
-  const sortCurrencies = (currencies) => {
-    switch (appState.sortingMethod) {
-      case 'alphabetically':
-        return currencies.sort((a, b) =>
-          a.name > b.name ? 1 : b.name > a.name ? -1 : 0
-        );
-      case 'random':
-        return shuffle(currencies);
-      default:
-        return currencies;
+  const buildAPIURL = (URI, relativeParam = null) => {
+    let builtURL = API_URL + '/' + URI;
+    if (relativeParam) {
+      builtURL += '?from=' + relativeParam;
     }
-  };
-
-  const getLatestExchangeRates = () => {
-    return fetch(buildAPIURL(appState.exchangeDateParam))
-      .then((response) => response.json())
-      .then((response) => response.rates);
-  };
-
-  const buildAPIURL = (URI) => {
-    console.log(URI);
-    const res = API_URL + '/' + URI + '?from=' + appState.exchangeRelativeParam;
-    return res;
+    return builtURL;
   };
 
   return (
     <AppContext.Provider
       value={{
-        displayedCurrencies,
-        setDisplayedCurrencies,
+        currencies,
+        setCurrencies,
         appState,
         setAppState,
       }}

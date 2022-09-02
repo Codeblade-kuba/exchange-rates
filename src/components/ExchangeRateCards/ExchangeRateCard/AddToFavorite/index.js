@@ -2,33 +2,24 @@ import { useContext } from 'react';
 
 import { AppContext } from '../../../../contexts/appContext';
 
-const AddToFavorite = ({ symbol }) => {
-  const { appState, setAppState } = useContext(AppContext);
+const AddToFavorite = ({ currency }) => {
+  const { setCurrencies } = useContext(AppContext);
 
-  function handleFavorite() {
-    if (appState.favorites.includes(symbol)) {
-      return removeFromFavorite();
-    }
-    return addToFavorite();
-  }
-
-  function removeFromFavorite() {
-    return setAppState((prev) => {
-      const newFavoritesArray = [...prev.favorites];
-      newFavoritesArray.splice(prev.favorites.indexOf(symbol), 1);
-      return { ...prev, favorites: newFavoritesArray };
+  function toggleFavorite() {
+    console.log(currency);
+    setCurrencies((prev) => {
+      const prevCopy = [...prev];
+      prevCopy.forEach((prevCurrency) => {
+        if (prevCurrency.symbol === currency.symbol) {
+          prevCurrency.isFavorite = !prevCurrency.isFavorite;
+        }
+      });
+      return prevCopy;
     });
   }
 
-  function addToFavorite() {
-    return setAppState((prev) => ({
-      ...prev,
-      favorites: [...prev.favorites, symbol],
-    }));
-  }
-
   return (
-    <button title="Add to favorite" onClick={() => handleFavorite()}>
+    <button title="Add to favorite" onClick={() => toggleFavorite()}>
       {'<3'}
     </button>
   );

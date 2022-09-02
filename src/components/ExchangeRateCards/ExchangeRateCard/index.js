@@ -1,22 +1,29 @@
-import AddToFavorite from './AddToFavorite';
+import { useContext } from 'react';
 
-const ExchangeRateCard = (props) => {
+import AddToFavorite from './AddToFavorite';
+import { AppContext } from '../../../contexts/appContext';
+
+const ExchangeRateCard = ({ currency }) => {
+  const { appState } = useContext(AppContext);
+
   return (
     <div
-      className={'exchange-rate-card ' + (props.isFavorite ? 'favorite' : '')}
+      className={
+        'exchange-rate-card ' + (currency.isFavorite ? 'favorite' : '')
+      }
     >
       <header>
-        <AddToFavorite symbol={props.symbol} />
-        <h4>{props.name}</h4>
+        <AddToFavorite currency={currency} />
+        <h4>{currency.name}</h4>
       </header>
       <div>
         <div>
           <span>Symbol:</span>
-          <b>{props.symbol}</b>
+          <b>{currency.symbol}</b>
         </div>
         <div>
           <span>Rate:</span>
-          <b>{props.rate}</b>
+          <b>{currency.rate?.toFixed(appState.decimalPlaces)}</b>
         </div>
       </div>
     </div>

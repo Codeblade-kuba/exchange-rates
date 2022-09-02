@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { AppContext } from '../../contexts/appContext';
 
 const ExchangeRelativeSelect = () => {
-  const { appState, setAppState, displayedCurrencies } = useContext(AppContext);
+  const { appState, setAppState, currencies } = useContext(AppContext);
 
   return (
     <select
@@ -17,7 +17,7 @@ const ExchangeRelativeSelect = () => {
         }))
       }
     >
-      {displayedCurrencies.map((currency, index) => (
+      {currencies.map((currency, index) => (
         <option value={currency.symbol} key={index}>
           {currency.symbol}
         </option>
