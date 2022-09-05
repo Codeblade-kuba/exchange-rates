@@ -10,7 +10,7 @@ const ShowFavoritesButton = () => {
   };
 
   return (
-    <button onClick={toggleShowFavorites}>
+    <button onClick={toggleShowFavorites} data-testid="show-favorites-button">
       {(appState.showFavorites ? 'Hide' : 'Show') + ' favorites'}
     </button>
   );

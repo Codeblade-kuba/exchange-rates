@@ -6,7 +6,6 @@ const AddToFavorite = ({ currency }) => {
   const { setCurrencies } = useContext(AppContext);
 
   function toggleFavorite() {
-    console.log(currency);
     setCurrencies((prev) => {
       const prevCopy = [...prev];
       prevCopy.forEach((prevCurrency) => {

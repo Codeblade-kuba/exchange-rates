@@ -1,7 +1,7 @@
 import ExchangeRelativeSelect from '../components/ExchangeRelativeSelect';
 import ExchangeDateInput from '../components/ExchangeDateInput';
 import ShowFavoritesButton from '../components/ShowFavoritesButton';
-import DecimalPlacesInput from '../components/DecimalPlacesInput';
+import DecimalPlacesSelect from '../components/DecimalPlacesSelect';
 import ExchangeRateSortingMethodSelect from '../components/ExchangeRateSortingMethodSelect';
 import ResetAppButton from '../components/ResetAppButton';
 
@@ -11,7 +11,7 @@ const Navbar = () => {
       <ExchangeRelativeSelect />
       <ExchangeDateInput />
       <ShowFavoritesButton />
-      <DecimalPlacesInput />
+      <DecimalPlacesSelect />
       <ExchangeRateSortingMethodSelect />
       <ResetAppButton />
     </nav>

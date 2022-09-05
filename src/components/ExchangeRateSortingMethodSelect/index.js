@@ -12,12 +12,17 @@ const ExchangeRateSortingMethodSelect = () => {
       name=""
       id=""
       value={appState.sortingMethod}
+      data-testid="exchange-rate-sorting-method-select"
       onChange={(e) =>
         setAppState((prev) => ({ ...prev, sortingMethod: e.target.value }))
       }
     >
       {sortingMethods.map((val, index) => (
-        <option value={val} key={index}>
+        <option
+          value={val}
+          key={index}
+          data-testid="exchange-rate-sorting-method-select-option"
+        >
           {val}
         </option>
       ))}
