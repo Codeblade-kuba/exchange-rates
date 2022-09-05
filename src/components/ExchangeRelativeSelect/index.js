@@ -1,9 +1,11 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../../contexts/appContext';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const ExchangeRelativeSelect = () => {
-  const { appState, setAppState, currencies } = useContext(AppContext);
+  const { appState, setAppState, currencies } = useContext(
+    ExchangeRatesAppContext
+  );
 
   const changeRelativeParam = (e) => {
     setAppState((prev) => ({

@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
-import { renderWithAppContext } from '../../utils/renderWithAppContext';
+import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ExchangeRateSortingMethodSelect from '.';
 
 test('ExchangeRateSortingMethodSelect should be rendered', () => {
-  renderWithAppContext(<ExchangeRateSortingMethodSelect />);
+  renderWithExchangeRatesAppContext(<ExchangeRateSortingMethodSelect />);
   const exchangeRateSortingMethodSelect = screen.getByTestId(
     'exchange-rate-sorting-method-select'
   );
@@ -11,7 +11,7 @@ test('ExchangeRateSortingMethodSelect should be rendered', () => {
 });
 
 test('ExchangeRateSortingMethodSelect should have proper initial value', () => {
-  renderWithAppContext(<ExchangeRateSortingMethodSelect />);
+  renderWithExchangeRatesAppContext(<ExchangeRateSortingMethodSelect />);
   const exchangeRateSortingMethodSelect = screen.getByTestId(
     'exchange-rate-sorting-method-select'
   );
@@ -19,7 +19,7 @@ test('ExchangeRateSortingMethodSelect should have proper initial value', () => {
 });
 
 test('ExchangeRateSortingMethodSelect options should have proper length', () => {
-  renderWithAppContext(<ExchangeRateSortingMethodSelect />);
+  renderWithExchangeRatesAppContext(<ExchangeRateSortingMethodSelect />);
   const exchangeRateSortingMethodSelect = screen.getAllByTestId(
     'exchange-rate-sorting-method-select-option'
   );

@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../../contexts/appContext';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const ShowFavoritesButton = () => {
-  const { appState, setAppState } = useContext(AppContext);
+  const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
   const toggleShowFavorites = () => {
     setAppState((prev) => ({ ...prev, showFavorites: !prev.showFavorites }));

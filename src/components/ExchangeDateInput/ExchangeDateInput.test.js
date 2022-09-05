@@ -1,15 +1,15 @@
 import { screen } from '@testing-library/react';
-import { renderWithAppContext } from '../../utils/renderWithAppContext';
+import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ExchangeDateInput from '.';
 
 test('ExchangeDateInput should be rendered', () => {
-  renderWithAppContext(<ExchangeDateInput />);
+  renderWithExchangeRatesAppContext(<ExchangeDateInput />);
   const exchangeDateInput = screen.getByTestId('exchange-date-input');
   expect(exchangeDateInput).toBeInTheDocument();
 });
 
 test('ExchangeDateInput should have empty initial value', () => {
-  renderWithAppContext(<ExchangeDateInput />);
+  renderWithExchangeRatesAppContext(<ExchangeDateInput />);
   const exchangeDateInput = screen.getByTestId('exchange-date-input');
   expect(exchangeDateInput).toHaveValue('');
 });

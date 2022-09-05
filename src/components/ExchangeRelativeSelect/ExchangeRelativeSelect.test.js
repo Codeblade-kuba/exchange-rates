@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithAppContext } from '../../utils/renderWithAppContext';
+import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ExchangeRelativeSelect from '.';
 
 const testCurrencies = [
@@ -9,13 +9,13 @@ const testCurrencies = [
 ];
 
 test('ExchangeRelativeSelect should be rendered', () => {
-  renderWithAppContext(<ExchangeRelativeSelect />);
+  renderWithExchangeRatesAppContext(<ExchangeRelativeSelect />);
   const exchangeRelativeSelect = screen.getByTestId('exchange-relative-select');
   expect(exchangeRelativeSelect).toBeInTheDocument();
 });
 
 test('ExchangeRelativeSelect should have proper value', () => {
-  renderWithAppContext(<ExchangeRelativeSelect />, {
+  renderWithExchangeRatesAppContext(<ExchangeRelativeSelect />, {
     appState: { exchangeRelativeParam: testCurrencies[0].symbol },
     currencies: testCurrencies,
   });
@@ -24,7 +24,7 @@ test('ExchangeRelativeSelect should have proper value', () => {
 });
 
 test('ExchangeRelativeSelect should have all currencies options', () => {
-  renderWithAppContext(<ExchangeRelativeSelect />, {
+  renderWithExchangeRatesAppContext(<ExchangeRelativeSelect />, {
     appState: { exchangeRelativeParam: testCurrencies[0].symbol },
     currencies: testCurrencies,
   });

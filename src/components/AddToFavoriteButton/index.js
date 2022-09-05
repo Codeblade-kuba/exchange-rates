@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../../../../contexts/appContext';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const AddToFavorite = ({ currency }) => {
-  const { setCurrencies } = useContext(AppContext);
+  const { setCurrencies } = useContext(ExchangeRatesAppContext);
 
   function toggleFavorite() {
     setCurrencies((prev) => {
@@ -18,7 +18,11 @@ const AddToFavorite = ({ currency }) => {
   }
 
   return (
-    <button title="Add to favorite" onClick={() => toggleFavorite()}>
+    <button
+      title="Add to favorite"
+      onClick={() => toggleFavorite()}
+      data-testid="add-to-favorite-button"
+    >
       {'<3'}
     </button>
   );

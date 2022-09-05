@@ -1,11 +1,11 @@
 import { useContext } from 'react';
 
-import { AppContext } from '../../contexts/appContext';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from './ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
 
 const ExchangeRateCards = () => {
-  const { appState, currencies } = useContext(AppContext);
+  const { appState, currencies } = useContext(ExchangeRatesAppContext);
 
   const shouldRenderExchangeCard = (currency) => {
     if (appState.showFavorites) {
@@ -33,7 +33,7 @@ const ExchangeRateCards = () => {
   };
 
   return (
-    <div>
+    <div data-testid="exchange-rate-cards">
       {getSortedCurrencies().map((currency, index) => {
         if (shouldRenderExchangeCard(currency))
           return <ExchangeRateCard key={index} currency={currency} />;

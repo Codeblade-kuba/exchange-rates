@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import { AppContext } from '../../contexts/appContext';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const DecimalPlacesSelect = () => {
-  const { appState, setAppState } = useContext(AppContext);
+  const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
   const decimalPlacesOptions = [0, 1, 2, 3, 4, 5];
 

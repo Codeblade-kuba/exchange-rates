@@ -1,8 +1,8 @@
 import { render } from '@testing-library/react';
-import { AppContext } from '../contexts/appContext';
+import { ExchangeRatesAppContext } from '../contexts/ExchangeRatesAppContext';
 import { appDefaultSettings } from '../data/appDefaultSettings';
 
-export const renderWithAppContext = (
+export const renderWithExchangeRatesAppContext = (
   component,
   { appState = {}, currencies = [] } = {}
 ) => {
@@ -11,8 +11,8 @@ export const renderWithAppContext = (
     currencies: [...currencies],
   };
   return render(
-    <AppContext.Provider value={extendedDefaultProps}>
+    <ExchangeRatesAppContext.Provider value={extendedDefaultProps}>
       {component}
-    </AppContext.Provider>
+    </ExchangeRatesAppContext.Provider>
   );
 };

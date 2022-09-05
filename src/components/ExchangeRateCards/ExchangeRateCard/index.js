@@ -1,19 +1,31 @@
 import { useContext } from 'react';
 
-import AddToFavorite from './AddToFavorite';
-import { AppContext } from '../../../contexts/appContext';
+import AddToFavoriteButton from '../../AddToFavoriteButton';
+import { ExchangeRatesAppContext } from '../../../contexts/ExchangeRatesAppContext';
 
 const ExchangeRateCard = ({ currency }) => {
-  const { appState } = useContext(AppContext);
+  const { appState } = useContext(ExchangeRatesAppContext);
+
+  const addClassesToExchangeRatesCard = (currency) => {
+    let classes = 'exchange-rate-card';
+    if (currency.isFavorite) classes += ' favorite';
+    return classes;
+  };
+
+  const getFixedCurrencyRate = (currency) => {
+    if (currency.rate) {
+      return currency.rate.toFixed(appState.decimalPlaces);
+    }
+    return '';
+  };
 
   return (
     <div
-      className={
-        'exchange-rate-card ' + (currency.isFavorite ? 'favorite' : '')
-      }
+      className={addClassesToExchangeRatesCard(currency)}
+      data-testid="exchange-rate-card"
     >
       <header>
-        <AddToFavorite currency={currency} />
+        <AddToFavoriteButton currency={currency} />
         <h4>{currency.name}</h4>
       </header>
       <div>
@@ -23,7 +35,9 @@ const ExchangeRateCard = ({ currency }) => {
         </div>
         <div>
           <span>Rate:</span>
-          <b>{currency.rate?.toFixed(appState.decimalPlaces)}</b>
+          <b data-testid="exchange-rate-card-rate">
+            {getFixedCurrencyRate(currency)}
+          </b>
         </div>
       </div>
     </div>

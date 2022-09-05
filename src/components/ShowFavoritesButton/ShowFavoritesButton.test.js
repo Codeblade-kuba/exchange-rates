@@ -1,22 +1,22 @@
 import { screen } from '@testing-library/react';
 
-import { renderWithAppContext } from '../../utils/renderWithAppContext';
+import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ShowFavoritesButton from '.';
 
 test('ShowFavoritesButton should be rendered', () => {
-  renderWithAppContext(<ShowFavoritesButton />);
+  renderWithExchangeRatesAppContext(<ShowFavoritesButton />);
   const showFavoritesButton = screen.getByTestId('show-favorites-button');
   expect(showFavoritesButton).toBeInTheDocument();
 });
 
 test('ShowFavoritesButton initally should have "Show favorites" text', () => {
-  renderWithAppContext(<ShowFavoritesButton />);
+  renderWithExchangeRatesAppContext(<ShowFavoritesButton />);
   const showFavoritesButton = screen.getByTestId('show-favorites-button');
   expect(showFavoritesButton).toHaveTextContent('Show favorites');
 });
 
 test('ShowFavoritesButton should have "Hide favorites" text', () => {
-  renderWithAppContext(<ShowFavoritesButton />, {
+  renderWithExchangeRatesAppContext(<ShowFavoritesButton />, {
     appState: { showFavorites: true },
   });
   const showFavoritesButton = screen.getByTestId('show-favorites-button');
