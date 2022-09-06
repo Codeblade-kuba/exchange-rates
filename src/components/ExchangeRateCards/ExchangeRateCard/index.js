@@ -13,10 +13,10 @@ const ExchangeRateCard = ({ currency }) => {
   };
 
   const getFixedCurrencyRate = (currency) => {
-    if (currency.rate) {
+    if (typeof currency.rate === 'number') {
       return currency.rate.toFixed(appState.decimalPlaces);
     }
-    return '';
+    return currency.rate;
   };
 
   return (
@@ -31,7 +31,7 @@ const ExchangeRateCard = ({ currency }) => {
       <div>
         <div>
           <span>Symbol:</span>
-          <b>{currency.symbol}</b>
+          <b data-testid="exchange-rate-card-symbol">{currency.symbol}</b>
         </div>
         <div>
           <span>Rate:</span>

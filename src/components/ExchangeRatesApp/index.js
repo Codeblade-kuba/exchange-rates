@@ -17,9 +17,8 @@ const ExchangeRatesApp = (props) => {
   }, [appState.exchangeRelativeParam, appState.exchangeDateParam]);
 
   const setInitialCurrencies = async () => {
-    let currencies = await getCurrencies();
+    const currencies = await getCurrencies();
     setCurrencies(currencies);
-    updateCurrenciesExchangeRates();
   };
 
   const getCurrenciesExchangeRates = async () => {
@@ -30,24 +29,36 @@ const ExchangeRatesApp = (props) => {
     return exchangeRates.rates;
   };
 
+  const setCurrenciesExchangeRates = (currencies, exchangeRates) => {
+    if (!exchangeRates) return false;
+    currencies.forEach((currency) => {
+      let exchangeRate = exchangeRates[currency.symbol];
+      if (typeof exchangeRate === 'number') {
+        currency.rate = exchangeRate;
+      } else {
+        // API doesn't provide any rate for same as relative exchange so we set it to prevent undefined errors
+        currency.rate = 'Current';
+      }
+      return currency;
+    });
+    return currencies;
+  };
+
   const updateCurrenciesExchangeRates = async () => {
     let exchangeRates = await getCurrenciesExchangeRates();
-    if (!exchangeRates) return false;
     setCurrencies((prev) => {
-      const _currencies = [...prev];
-      _currencies.forEach((currency) => {
-        let exchangeRate = exchangeRates[currency.symbol];
-        if (typeof exchangeRate !== 'number') return currency;
-        currency.rate = exchangeRate;
-        return currency;
-      });
-      return _currencies;
+      let currencies = [...prev];
+      currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
+      return currencies;
     });
   };
 
   const getCurrencies = async () => {
     const currencyNames = await getCurrencyNames();
-    return buildCurrenciesFromCurrencyNames(currencyNames);
+    let currencies = buildCurrenciesFromCurrencyNames(currencyNames);
+    let exchangeRates = await getCurrenciesExchangeRates();
+    currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
+    return currencies;
   };
 
   const getCurrencyNames = async () => {

@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react';
+import { within, screen } from '@testing-library/react';
 import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ExchangeRelativeSelect from '.';
 
@@ -28,8 +28,9 @@ test('ExchangeRelativeSelect should have all currencies options', () => {
     appState: { exchangeRelativeParam: testCurrencies[0].symbol },
     currencies: testCurrencies,
   });
-  const exchangeRelativeSelectOptions = screen.getAllByTestId(
-    'exchange-relative-select-option'
-  );
+  const exchangeRelativeSelect = screen.getByTestId('exchange-relative-select');
+  const exchangeRelativeSelectOptions = within(
+    exchangeRelativeSelect
+  ).getAllByRole('option');
   expect(exchangeRelativeSelectOptions).toHaveLength(3);
 });

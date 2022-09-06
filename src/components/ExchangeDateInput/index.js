@@ -1,12 +1,16 @@
 import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import { appDefaultSettings } from '../../data/appDefaultSettings';
 
 const ExchangeDateInput = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
   const changeExchangeDateParam = (e) => {
-    setAppState((prev) => ({ ...prev, exchangeDateParam: e.target.value }));
+    setAppState((prev) => {
+      const valueToSet = e.target.value || appDefaultSettings.exchangeDateParam;
+      return { ...prev, exchangeDateParam: valueToSet };
+    });
   };
 
   const getValueIfDateIsValid = (value) => {

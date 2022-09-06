@@ -1,22 +1,22 @@
-import { screen, within } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import { renderWithExchangeRatesAppContext } from '../../utils/renderWithExchangeRatesAppContext';
 import ExchangeRateCards from '.';
 
 const testCurrencies = [
   {
-    name: 'A',
+    name: 'Currency A',
     isFavorite: false,
   },
   {
-    name: 'C',
+    name: 'Currency C',
     isFavorite: false,
   },
   {
-    name: 'B',
+    name: 'Currency B',
     isFavorite: true,
   },
   {
-    name: 'D',
+    name: 'Currency D',
     isFavorite: false,
   },
 ];
@@ -31,8 +31,21 @@ test('ExchangeRateCard instances should be rendered in good amount', () => {
   renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
     currencies: testCurrencies,
   });
-  const exchangeRateCardInstances = screen.getAllByTestId('exchange-rate-card');
+  const exchangeRateCardInstances = screen.getAllByTestId(
+    'exchange-rate-card-rate'
+  );
   expect(exchangeRateCardInstances).toHaveLength(4);
+});
+
+test('ExchangeRateCards should render instances default', () => {
+  renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
+    currencies: testCurrencies,
+  });
+  const exchangeRateCardInstances = screen.getAllByTestId('exchange-rate-card');
+  expect(exchangeRateCardInstances[0]).toHaveTextContent('Currency A');
+  expect(exchangeRateCardInstances[1]).toHaveTextContent('Currency C');
+  expect(exchangeRateCardInstances[2]).toHaveTextContent('Currency B');
+  expect(exchangeRateCardInstances[3]).toHaveTextContent('Currency D');
 });
 
 test('ExchangeRateCards should render instances alphabetically', () => {
@@ -41,8 +54,17 @@ test('ExchangeRateCards should render instances alphabetically', () => {
     currencies: testCurrencies,
   });
   const exchangeRateCardInstances = screen.getAllByTestId('exchange-rate-card');
-  expect(exchangeRateCardInstances[0]).toHaveTextContent('A');
-  expect(exchangeRateCardInstances[1]).toHaveTextContent('B');
-  expect(exchangeRateCardInstances[2]).toHaveTextContent('C');
-  expect(exchangeRateCardInstances[3]).toHaveTextContent('D');
+  expect(exchangeRateCardInstances[0]).toHaveTextContent('Currency A');
+  expect(exchangeRateCardInstances[1]).toHaveTextContent('Currency B');
+  expect(exchangeRateCardInstances[2]).toHaveTextContent('Currency C');
+  expect(exchangeRateCardInstances[3]).toHaveTextContent('Currency D');
+});
+
+test('ExchangeRateCards should render only favorites', () => {
+  renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
+    appState: { showFavorites: true },
+    currencies: testCurrencies,
+  });
+  const exchangeRateCardInstances = screen.getAllByTestId('exchange-rate-card');
+  expect(exchangeRateCardInstances[0]).toHaveTextContent('Currency B');
 });
