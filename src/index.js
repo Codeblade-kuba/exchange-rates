@@ -4,9 +4,10 @@ import './index.scss';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
-// root.render(<App />);
+// Some features not working in StrictMode and probably its not because App is written improperly
+// root.render(
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// );
+root.render(<App />);

@@ -20,12 +20,16 @@ const ExchangeDateInput = () => {
   };
 
   return (
-    <input
-      type="date"
-      value={getValueIfDateIsValid(appState.exchangeDateParam)}
-      onChange={(e) => changeExchangeDateParam(e)}
-      data-testid="exchange-date-input"
-    />
+    <>
+      <label htmlFor="exchange-date">Exchange date</label>
+      <input
+        id="exchange-date"
+        title="Choose exchange rates date"
+        type="date"
+        value={getValueIfDateIsValid(appState.exchangeDateParam)}
+        onChange={(e) => changeExchangeDateParam(e)}
+      />
+    </>
   );
 };
 

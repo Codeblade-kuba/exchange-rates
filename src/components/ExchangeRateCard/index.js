@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import AddToFavoriteButton from '../../AddToFavoriteButton';
-import { ExchangeRatesAppContext } from '../../../contexts/ExchangeRatesAppContext';
+import AddToFavoriteButton from '../AddToFavoriteButton';
+import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const ExchangeRateCard = ({ currency }) => {
   const { appState } = useContext(ExchangeRatesAppContext);
@@ -20,27 +20,32 @@ const ExchangeRateCard = ({ currency }) => {
   };
 
   return (
-    <div
-      className={addClassesToExchangeRatesCard(currency)}
-      data-testid="exchange-rate-card"
-    >
+    <article className={addClassesToExchangeRatesCard(currency)}>
       <header>
         <AddToFavoriteButton currency={currency} />
         <h4>{currency.name}</h4>
       </header>
       <div>
         <div>
-          <span>Symbol:</span>
-          <b data-testid="exchange-rate-card-symbol">{currency.symbol}</b>
+          <label htmlFor={`currency-${currency.symbol}-symbol`}>Symbol:</label>
+          <input
+            id={`currency-${currency.symbol}-symbol`}
+            value={currency.symbol}
+            type="text"
+            readOnly
+          />
         </div>
         <div>
-          <span>Rate:</span>
-          <b data-testid="exchange-rate-card-rate">
-            {getFixedCurrencyRate(currency)}
-          </b>
+          <label htmlFor={`currency-${currency.symbol}-rate`}>Rate:</label>
+          <input
+            id={`currency-${currency.symbol}-rate`}
+            value={getFixedCurrencyRate(currency)}
+            type="text"
+            readOnly
+          />
         </div>
       </div>
-    </div>
+    </article>
   );
 };
 

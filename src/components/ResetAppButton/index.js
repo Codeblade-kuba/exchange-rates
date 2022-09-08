@@ -8,7 +8,7 @@ const ResetAppButton = () => {
 
   return (
     <button
-      data-testid="reset-app-button"
+      title="Reset app settings"
       onClick={() => setAppState(appDefaultSettings)}
     >
       Reset

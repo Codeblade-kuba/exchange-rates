@@ -16,23 +16,26 @@ const ExchangeRelativeSelect = () => {
   };
 
   return (
-    <select
-      name="Exchange rate relative currency"
-      value={appState.exchangeRelativeParam}
-      data-testid="exchange-relative-select"
-      onChange={(e) => changeRelativeParam(e)}
-    >
-      {currencies.map((currency, index) => (
-        <option
-          value={currency.symbol}
-          key={index}
-          label={currency.symbol}
-          data-testid={'exchange-relative-select-option-' + currency.symbol}
-        >
-          {currency.symbol}
-        </option>
-      ))}
-    </select>
+    <>
+      <label htmlFor="exchange-relative">Exchange relative currency</label>
+      <select
+        id="exchange-relative"
+        title="Choose exchange rates relative currency"
+        value={appState.exchangeRelativeParam}
+        onChange={(e) => changeRelativeParam(e)}
+      >
+        {currencies.map((currency, index) => (
+          <option
+            value={currency.symbol}
+            key={index}
+            label={currency.symbol}
+            data-testid={'exchange-relative-select-option-' + currency.symbol}
+          >
+            {currency.symbol}
+          </option>
+        ))}
+      </select>
+    </>
   );
 };
 

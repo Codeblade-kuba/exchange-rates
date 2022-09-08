@@ -4,6 +4,6 @@ import ResetAppButton from '.';
 
 test('ResetAppButton should be rendered', () => {
   renderWithExchangeRatesAppContext(<ResetAppButton />);
-  const showFavoritesButton = screen.getByTestId('reset-app-button');
+  const showFavoritesButton = screen.getByTitle('Reset app settings');
   expect(showFavoritesButton).toBeInTheDocument();
 });

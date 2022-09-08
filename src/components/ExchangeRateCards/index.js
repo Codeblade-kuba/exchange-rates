@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
-import ExchangeRateCard from './ExchangeRateCard';
+import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
 
 const ExchangeRateCards = () => {
