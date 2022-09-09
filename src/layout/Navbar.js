@@ -2,16 +2,16 @@ import ExchangeRelativeSelect from '../components/ExchangeRelativeSelect';
 import ExchangeDateInput from '../components/ExchangeDateInput';
 import ShowFavoritesButton from '../components/ShowFavoritesButton';
 import DecimalPlacesSelect from '../components/DecimalPlacesSelect';
-import ExchangeRateSortingMethodSelect from '../components/ExchangeRateSortingMethodSelect';
-import ResetAppButton from '../components/ResetAppButton';
+import RatesSortingMethodSelect from '../components/RatesSortingMethodSelect';
+import ResetButton from '../components/ResetButton';
 
 const componentsToIncludeInNav = [
   <ExchangeRelativeSelect />,
   <ExchangeDateInput />,
   <ShowFavoritesButton />,
   <DecimalPlacesSelect />,
-  <ExchangeRateSortingMethodSelect />,
-  <ResetAppButton />,
+  <RatesSortingMethodSelect />,
+  <ResetButton />,
 ];
 
 const Navbar = () => {

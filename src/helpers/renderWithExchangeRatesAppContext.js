@@ -4,11 +4,12 @@ import { appDefaultSettings } from '../data/appDefaultSettings';
 
 export const renderWithExchangeRatesAppContext = (
   component,
-  { appState = {}, currencies = [] } = {}
+  { appState = {}, currencies = [], error = '' } = {}
 ) => {
   const extendedDefaultProps = {
     appState: { ...appDefaultSettings, ...appState },
     currencies: [...currencies],
+    error: error,
   };
   return render(
     <ExchangeRatesAppContext.Provider value={extendedDefaultProps}>

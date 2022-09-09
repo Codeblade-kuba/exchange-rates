@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithExchangeRatesAppContext } from '../../../utils/renderWithExchangeRatesAppContext';
+import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeRateCards from '..';
 
 const testCurrencies = [
@@ -26,13 +26,13 @@ const testCurrencies = [
 ];
 
 describe('ExchangeRateCards', () => {
-  it('ExchangeRateCards should be rendered', () => {
+  it('should be rendered', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCards />);
     const exchangeRateCards = screen.getByTestId('exchange-rate-cards');
     expect(exchangeRateCards).toBeInTheDocument();
   });
 
-  it('ExchangeRateCard instances should be rendered in good amount', () => {
+  it('instances should be rendered in good amount', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
       currencies: testCurrencies,
     });
@@ -40,7 +40,7 @@ describe('ExchangeRateCards', () => {
     expect(exchangeRateCardInstances).toHaveLength(4);
   });
 
-  it('ExchangeRateCards should render instances default', () => {
+  it('should render instances default', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
       currencies: testCurrencies,
     });
@@ -59,7 +59,7 @@ describe('ExchangeRateCards', () => {
     );
   });
 
-  test('ExchangeRateCards should render instances alphabetically', () => {
+  it('should render instances alphabetically', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
       appState: { sortingMethod: 'alphabetically' },
       currencies: testCurrencies,
@@ -79,7 +79,7 @@ describe('ExchangeRateCards', () => {
     );
   });
 
-  test('ExchangeRateCards should render only favorites', () => {
+  it('ExchangeRateCards should render only favorites', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
       appState: { showFavorites: true },
       currencies: testCurrencies,

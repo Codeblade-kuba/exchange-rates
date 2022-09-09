@@ -1,12 +1,12 @@
 import ExchangeRatesApp from '../components/ExchangeRatesApp';
 import Layout from '../layout/Layout';
-import ExchangeRateCards from '../components/ExchangeRateCards';
+import ExchangeRateCardsContainer from '../components/ExchangeRateCardsContainer';
 
 const Home = () => {
   return (
     <ExchangeRatesApp>
       <Layout>
-        <ExchangeRateCards></ExchangeRateCards>
+        <ExchangeRateCardsContainer />
       </Layout>
     </ExchangeRatesApp>
   );

@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
-import { appDefaultSettings } from '../../data/appDefaultSettings';
 
 const ExchangeRelativeSelect = () => {
   const { appState, setAppState, currencies } = useContext(
@@ -17,7 +16,7 @@ const ExchangeRelativeSelect = () => {
 
   return (
     <>
-      <label htmlFor="exchange-relative">Exchange relative currency</label>
+      <label htmlFor="exchange-relative">Relative currency</label>
       <select
         id="exchange-relative"
         title="Choose exchange rates relative currency"

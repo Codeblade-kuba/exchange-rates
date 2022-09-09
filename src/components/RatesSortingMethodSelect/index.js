@@ -2,7 +2,7 @@ import { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
-const ExchangeRateSortingMethodSelect = () => {
+const RatesSortingMethodSelect = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
   const sortingMethods = ['default', 'alphabetically', 'random'];
@@ -27,4 +27,4 @@ const ExchangeRateSortingMethodSelect = () => {
   );
 };
 
-export default ExchangeRateSortingMethodSelect;
+export default RatesSortingMethodSelect;

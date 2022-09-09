@@ -4,10 +4,11 @@ const getCurrenciesExchangeRates = async (
   exchangeDateParam,
   exchangeRelativeParam
 ) => {
-  console.log('called!');
   let exchangeRates = await fetch(
     buildAPIURL(exchangeDateParam, exchangeRelativeParam)
   );
+  if (!exchangeRates.ok)
+    throw new Error('Error while fetching exchange rates...');
   exchangeRates = await exchangeRates.json();
   return exchangeRates.rates;
 };

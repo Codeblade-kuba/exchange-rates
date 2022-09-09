@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
+import { useMemo } from 'react';
+import { useCallback } from 'react';
 
 const ExchangeRateCards = () => {
   const { appState, currencies } = useContext(ExchangeRatesAppContext);
@@ -15,7 +17,8 @@ const ExchangeRateCards = () => {
     return true;
   };
 
-  const getSortedCurrencies = () => {
+  const sortedCurrencies = useMemo(() => {
+    console.log(appState.exchangeRelativeParam);
     let sortedCurrencies = [...currencies];
     switch (appState.sortingMethod) {
       case 'alphabetically':
@@ -30,16 +33,16 @@ const ExchangeRateCards = () => {
         break;
     }
     return sortedCurrencies;
-  };
+  }, [currencies.length, appState.sortingMethod]);
 
   return (
-    <div data-testid="exchange-rate-cards">
-      {getSortedCurrencies().map((currency, index) => {
+    <section data-testid="exchange-rate-cards">
+      {sortedCurrencies.map((currency, index) => {
         if (shouldRenderExchangeCard(currency))
           return <ExchangeRateCard key={index} currency={currency} />;
         return false;
       })}
-    </div>
+    </section>
   );
 };
 

@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithExchangeRatesAppContext } from '../../../utils/renderWithExchangeRatesAppContext';
+import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeRateCard from '..';
 
 const testCurrency = {

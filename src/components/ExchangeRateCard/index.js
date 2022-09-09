@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import AddToFavoriteButton from '../AddToFavoriteButton';
+import AddToFavoritesButton from '../AddToFavoritesButton';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 
 const ExchangeRateCard = ({ currency }) => {
@@ -22,10 +22,10 @@ const ExchangeRateCard = ({ currency }) => {
   return (
     <article className={addClassesToExchangeRatesCard(currency)}>
       <header>
-        <AddToFavoriteButton currency={currency} />
-        <h4>{currency.name}</h4>
+        <AddToFavoritesButton currency={currency} />
+        <h2>{currency.name}</h2>
       </header>
-      <div>
+      <section>
         <div>
           <label htmlFor={`currency-${currency.symbol}-symbol`}>Symbol:</label>
           <input
@@ -44,7 +44,7 @@ const ExchangeRateCard = ({ currency }) => {
             readOnly
           />
         </div>
-      </div>
+      </section>
     </article>
   );
 };

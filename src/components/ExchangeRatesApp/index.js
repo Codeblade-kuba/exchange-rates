@@ -2,8 +2,8 @@ import { useState, useEffect, useRef } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import { appDefaultSettings } from '../../data/appDefaultSettings';
-import getCurrenciesExchangeRates from './api/getCurrenciesExchangeRates';
-import getCurrencyNames from './api/getCurrencyNames';
+import getCurrenciesExchangeRates from '../../api/getCurrenciesExchangeRates';
+import getCurrencyNames from '../../api/getCurrencyNames';
 
 const useNonInitialEffect = (effect, deps = []) => {
   const initialRender = useRef(true);
@@ -24,6 +24,7 @@ const useNonInitialEffect = (effect, deps = []) => {
 const ExchangeRatesApp = (props) => {
   const [appState, setAppState] = useState(appDefaultSettings);
   const [currencies, setCurrencies] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     setInitialCurrencies();
@@ -58,25 +59,35 @@ const ExchangeRatesApp = (props) => {
   };
 
   const updateCurrenciesExchangeRates = async () => {
-    let exchangeRates = await getCurrenciesExchangeRates(
-      appState.exchangeDateParam,
-      appState.exchangeRelativeParam
-    );
-    setCurrencies((prev) => {
-      let currencies = [...prev];
-      currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
-      return currencies;
-    });
+    try {
+      let exchangeRates = await getCurrenciesExchangeRates(
+        appState.exchangeDateParam,
+        appState.exchangeRelativeParam
+      );
+      setCurrencies((prev) => {
+        let currencies = [...prev];
+        currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
+        return currencies;
+      });
+    } catch (err) {
+      setError(err);
+    }
+    return currencies;
   };
 
   const getCurrencies = async () => {
-    const currencyNames = await getCurrencyNames();
-    let currencies = buildCurrenciesFromCurrencyNames(currencyNames);
-    let exchangeRates = await getCurrenciesExchangeRates(
-      appState.exchangeDateParam,
-      appState.exchangeRelativeParam
-    );
-    currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
+    try {
+      const currencyNames = await getCurrencyNames();
+      let currencies = buildCurrenciesFromCurrencyNames(currencyNames);
+      let exchangeRates = await getCurrenciesExchangeRates(
+        appState.exchangeDateParam,
+        appState.exchangeRelativeParam
+      );
+      currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
+      return currencies;
+    } catch (err) {
+      setError(err);
+    }
     return currencies;
   };
 
@@ -100,6 +111,8 @@ const ExchangeRatesApp = (props) => {
           setCurrencies,
           appState,
           setAppState,
+          error,
+          setError,
         }}
       >
         {props.children}

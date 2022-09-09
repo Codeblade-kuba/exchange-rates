@@ -8,11 +8,11 @@ import {
 import ExchangeRatesApp from '..';
 import Layout from '../../../layout/Layout';
 import ExchangeRateCards from '../../ExchangeRateCards';
-import getCurrencyNames from '../api/getCurrencyNames';
-import getCurrenciesExchangeRates from '../api/getCurrenciesExchangeRates';
+import getCurrencyNames from '../../../api/getCurrencyNames';
+import getCurrenciesExchangeRates from '../../../api/getCurrenciesExchangeRates';
 
-jest.mock('../api/getCurrencyNames');
-jest.mock('../api/getCurrenciesExchangeRates');
+jest.mock('../../../api/getCurrencyNames');
+jest.mock('../../../api/getCurrenciesExchangeRates');
 
 const renderExchangeRatesApp = () => {
   render(
@@ -40,13 +40,13 @@ beforeEach(() => {
 });
 
 describe('render', () => {
-  test('ExchangeRatesApp should be rendered', () => {
+  it('ExchangeRatesApp should be rendered', () => {
     renderExchangeRatesApp();
     const exchangeRateCards = screen.getByTestId('exchange-rate-app');
     expect(exchangeRateCards).toBeInTheDocument();
   });
 
-  test('ExchangeRateCard should be rendered in proper amount', async () => {
+  it('ExchangeRateCard should be rendered in proper amount', async () => {
     renderExchangeRatesApp();
     const exchangeRateCardElements = await screen.findAllByRole('article');
     expect(exchangeRateCardElements).toHaveLength(
@@ -58,10 +58,10 @@ describe('render', () => {
 describe('favorites functionality', () => {
   it('exchangeRateCard should have favorite class', async () => {
     renderExchangeRatesApp();
-    const addToFavoriteButtons = await screen.findAllByTestId(
+    const AddToFavoritesButtons = await screen.findAllByTestId(
       'add-to-favorite-button'
     );
-    fireEvent.click(addToFavoriteButtons[0]);
+    fireEvent.click(AddToFavoritesButtons[0]);
     const exchangeRateCardElements = await screen.findAllByRole('article');
     expect(exchangeRateCardElements[0]).toHaveClass('favorite');
   });
@@ -69,14 +69,12 @@ describe('favorites functionality', () => {
   it('app should show only favorites', async () => {
     renderExchangeRatesApp();
 
-    const addToFavoriteButtons = await screen.findAllByTestId(
+    const AddToFavoritesButtons = await screen.findAllByTestId(
       'add-to-favorite-button'
     );
-    fireEvent.click(addToFavoriteButtons[0]);
+    fireEvent.click(AddToFavoritesButtons[0]);
 
-    const showFavoritesButton = await screen.findByTestId(
-      'show-favorites-button'
-    );
+    const showFavoritesButton = await screen.findByTitle(/toggle favorites/i);
     fireEvent.click(showFavoritesButton);
 
     const exchangeRateCardElements = await screen.findAllByRole('article');
@@ -108,9 +106,7 @@ describe('exchange relative', () => {
   it('should change relative exchange rate', async () => {
     renderExchangeRatesApp();
 
-    const exchangeRelativeSelect = screen.getByLabelText(
-      'Exchange relative currency'
-    );
+    const exchangeRelativeSelect = screen.getByLabelText(/relative currency/i);
     await within(exchangeRelativeSelect).findAllByRole('option');
 
     getCurrenciesExchangeRates.mockImplementation(() => ({
