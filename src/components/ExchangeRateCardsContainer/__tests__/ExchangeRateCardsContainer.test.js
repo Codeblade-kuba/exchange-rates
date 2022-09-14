@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeRateCardsContainer from '..';
 
 describe('ExchangeRateCardsContainer', () => {
@@ -10,9 +10,9 @@ describe('ExchangeRateCardsContainer', () => {
   });
   it('should show given message', () => {
     renderWithExchangeRatesAppContext(<ExchangeRateCardsContainer />, {
-      error: 'Error',
+      error: new Error('asd'),
     });
-    const exchangeRateCards = screen.getByTestId('error-message');
-    expect(exchangeRateCards).toBeInTheDocument();
+    const errorMessage = screen.getByTestId('error-message');
+    expect(errorMessage).toBeInTheDocument();
   });
 });

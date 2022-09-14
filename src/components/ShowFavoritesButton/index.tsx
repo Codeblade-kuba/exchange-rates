@@ -6,12 +6,13 @@ const ShowFavoritesButton = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
   const toggleShowFavorites = () => {
+    if (!setAppState) return;
     setAppState((prev) => ({ ...prev, showFavorites: !prev.showFavorites }));
   };
 
   return (
     <button onClick={toggleShowFavorites} title="Toggle favorites">
-      {(appState.showFavorites ? 'Hide' : 'Show') + ' favorites'}
+      {(appState?.showFavorites ? 'Hide' : 'Show') + ' favorites'}
     </button>
   );
 };

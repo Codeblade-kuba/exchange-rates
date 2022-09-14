@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import ShowFavoritesButton from '..';
 
 describe('ShowFavoritesButton', () => {

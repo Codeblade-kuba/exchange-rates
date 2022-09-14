@@ -1,15 +1,24 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
-import { appDefaultSettings } from '../../data/appDefaultSettings';
+import appDefaultSettings from './data/appDefaultSettings';
 import getCurrenciesExchangeRates from '../../api/getCurrenciesExchangeRates';
 import getCurrencyNames from '../../api/getCurrencyNames';
+import AppStateInterface from './interfaces/AppState';
+import CurrencyInterface from './interfaces/Currency';
 
-const useNonInitialEffect = (effect, deps = []) => {
+interface Props {
+  children: JSX.Element | JSX.Element[];
+}
+
+const useNonInitialEffect = (
+  effect: React.EffectCallback,
+  deps?: React.DependencyList | undefined
+) => {
   const initialRender = useRef(true);
 
   useEffect(() => {
-    let effectReturns = () => {};
+    let effectReturns: void | (() => void) = () => {};
     if (initialRender.current) {
       initialRender.current = false;
     } else {
@@ -21,10 +30,11 @@ const useNonInitialEffect = (effect, deps = []) => {
   }, deps);
 };
 
-const ExchangeRatesApp = (props) => {
-  const [appState, setAppState] = useState(appDefaultSettings);
-  const [currencies, setCurrencies] = useState([]);
-  const [error, setError] = useState('');
+const ExchangeRatesApp = ({ children }: Props) => {
+  const [appState, setAppState] =
+    useState<AppStateInterface>(appDefaultSettings);
+  const [currencies, setCurrencies] = useState<CurrencyInterface[]>();
+  const [error, setError] = useState<unknown>();
 
   useEffect(() => {
     setInitialCurrencies();
@@ -34,24 +44,23 @@ const ExchangeRatesApp = (props) => {
     updateCurrenciesExchangeRates();
   }, [appState.exchangeRelativeParam, appState.exchangeDateParam]);
 
-  // useEffect(() => {
-  //   updateCurrenciesExchangeRates();
-  // }, [appState.exchangeRelativeParam, appState.exchangeDateParam]);
-
   const setInitialCurrencies = async () => {
     const currencies = await getCurrencies();
     setCurrencies(currencies);
   };
 
-  const setCurrenciesExchangeRates = (currencies, exchangeRates) => {
-    if (!exchangeRates) return false;
+  const setCurrenciesExchangeRates = (
+    currencies: CurrencyInterface[],
+    exchangeRates: { [symbol: string]: number }
+  ) => {
+    if (!exchangeRates) return currencies;
     currencies.forEach((currency) => {
       let exchangeRate = exchangeRates[currency.symbol];
-      if (typeof exchangeRate === 'number') {
+      if (exchangeRate) {
         currency.rate = exchangeRate;
       } else {
         // API doesn't provide any rate for same as relative exchange so we set it to prevent undefined errors
-        currency.rate = 'Current';
+        currency.rate = 1;
       }
       return currency;
     });
@@ -65,7 +74,10 @@ const ExchangeRatesApp = (props) => {
         appState.exchangeRelativeParam
       );
       setCurrencies((prev) => {
-        let currencies = [...prev];
+        if (!prev) {
+          return undefined;
+        }
+        let currencies: CurrencyInterface[] = [...prev];
         currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
         return currencies;
       });
@@ -91,13 +103,16 @@ const ExchangeRatesApp = (props) => {
     return currencies;
   };
 
-  const buildCurrenciesFromCurrencyNames = (currenciesNames) => {
-    const currenciesArray = [];
+  const buildCurrenciesFromCurrencyNames = (currenciesNames: {
+    [symbol: string]: string;
+  }) => {
+    const currenciesArray: CurrencyInterface[] = [];
     if (typeof currenciesNames !== 'object') return currenciesArray;
     Object.keys(currenciesNames).forEach((symbol) => {
       currenciesArray.push({
         symbol,
         name: currenciesNames[symbol],
+        isFavorite: false,
       });
     });
     return currenciesArray;
@@ -115,7 +130,7 @@ const ExchangeRatesApp = (props) => {
           setError,
         }}
       >
-        {props.children}
+        {children}
       </ExchangeRatesAppContext.Provider>
     </div>
   );

@@ -1,7 +1,7 @@
 import { screen, within } from '@testing-library/react';
-import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import DecimalPlacesSelect from '..';
-import { appDefaultSettings } from '../../../data/appDefaultSettings';
+import appDefaultSettings from '../../ExchangeRatesApp/data/appDefaultSettings';
 import settings from '../data/settings';
 
 describe('DecimalPlacesSelect', () => {

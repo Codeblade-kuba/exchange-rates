@@ -1,22 +1,21 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import AddToFavoritesButton from '../AddToFavoritesButton';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 
-const ExchangeRateCard = ({ currency }) => {
+const ExchangeRateCard = ({ currency }: { currency: CurrencyInterface }) => {
   const { appState } = useContext(ExchangeRatesAppContext);
 
-  const addClassesToExchangeRatesCard = (currency) => {
+  const addClassesToExchangeRatesCard = (currency: CurrencyInterface) => {
     let classes = 'exchange-rate-card';
     if (currency.isFavorite) classes += ' favorite';
     return classes;
   };
 
-  const getFixedCurrencyRate = (currency) => {
-    if (typeof currency.rate === 'number') {
-      return currency.rate.toFixed(appState.decimalPlaces);
-    }
-    return currency.rate;
+  const getFixedCurrencyRate = (currency: CurrencyInterface) => {
+    if (!currency || !currency.rate) return;
+    return currency.rate.toFixed(appState?.decimalPlaces);
   };
 
   return (

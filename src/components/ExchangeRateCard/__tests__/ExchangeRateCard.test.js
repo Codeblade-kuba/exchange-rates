@@ -1,11 +1,11 @@
 import { screen } from '@testing-library/react';
-import { renderWithExchangeRatesAppContext } from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeRateCard from '..';
 
 const testCurrency = {
   name: 'testName',
   symbol: 'TNM',
-  rate: '1.23450',
+  rate: 1.23456,
   isFavorite: false,
 };
 
@@ -39,6 +39,6 @@ describe('ExchangeRateCard', () => {
       <ExchangeRateCard currency={testCurrency} />
     );
     const exchangeRateCardRate = screen.getByLabelText(/rate/i);
-    expect(exchangeRateCardRate).toHaveValue(testCurrency.rate);
+    expect(exchangeRateCardRate).toHaveValue(testCurrency.rate.toString());
   });
 });

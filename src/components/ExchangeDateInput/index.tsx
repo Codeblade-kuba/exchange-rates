@@ -6,17 +6,18 @@ import appDefaultSettings from '../ExchangeRatesApp/data/appDefaultSettings';
 const ExchangeDateInput = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
-  const changeExchangeDateParam = (e) => {
+  const changeExchangeDateParam = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!setAppState) return;
     setAppState((prev) => {
       const valueToSet = e.target.value || appDefaultSettings.exchangeDateParam;
       return { ...prev, exchangeDateParam: valueToSet };
     });
   };
 
-  const getValueIfDateIsValid = (value) => {
+  const getValueIfDateIsValid = (value: string | undefined) => {
+    if (!value) return;
     const date = new Date(value);
-    if (date instanceof Date && !isNaN(date)) return value;
-    return '';
+    if (date) return value;
   };
 
   return (
@@ -26,7 +27,7 @@ const ExchangeDateInput = () => {
         id="exchange-date"
         title="Choose exchange rates date"
         type="date"
-        value={getValueIfDateIsValid(appState.exchangeDateParam)}
+        value={getValueIfDateIsValid(appState?.exchangeDateParam)}
         onChange={(e) => changeExchangeDateParam(e)}
       />
     </>

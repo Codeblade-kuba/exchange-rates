@@ -1,4 +1,6 @@
-export const appDefaultSettings = {
+import AppStateInterface from '../interfaces/AppState';
+
+const appDefaultSettings: AppStateInterface = {
   exchangeRelativeParam: 'EUR',
   exchangeDateParam: 'latest',
   favorites: [],
@@ -7,3 +9,5 @@ export const appDefaultSettings = {
   showFavorites: false,
   reset: false,
 };
+
+export default appDefaultSettings;

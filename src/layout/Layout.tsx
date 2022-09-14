@@ -1,13 +1,19 @@
+import React from 'react';
+
 import Header from './Header';
 import Footer from './Footer';
 import Container from './Container';
 
-const Layout = (props) => {
+interface Props {
+  children: JSX.Element | JSX.Element[];
+}
+
+const Layout = ({ children }: Props) => {
   return (
     <>
       <Header></Header>
       <main>
-        <Container>{props.children}</Container>
+        <Container>{children}</Container>
       </main>
       <Footer></Footer>
     </>

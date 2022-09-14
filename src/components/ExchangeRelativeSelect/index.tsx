@@ -7,7 +7,8 @@ const ExchangeRelativeSelect = () => {
     ExchangeRatesAppContext
   );
 
-  const changeRelativeParam = (e) => {
+  const changeRelativeParam = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    if (!setAppState) return;
     setAppState((prev) => ({
       ...prev,
       exchangeRelativeParam: e.target.value,
@@ -20,10 +21,10 @@ const ExchangeRelativeSelect = () => {
       <select
         id="exchange-relative"
         title="Choose exchange rates relative currency"
-        value={appState.exchangeRelativeParam}
+        value={appState?.exchangeRelativeParam}
         onChange={(e) => changeRelativeParam(e)}
       >
-        {currencies.map((currency, index) => (
+        {currencies?.map((currency, index) => (
           <option
             value={currency.symbol}
             key={index}
