@@ -95,7 +95,7 @@ describe('decimal places functionality', () => {
 
     const exchangeRates = await screen.findAllByLabelText(/rate/i);
     exchangeRates.forEach((rate) => {
-      if (rate.value === 'Current') return false;
+      if (rate.value === '1.00000') return false;
       const floatingPointNumbers = rate.value.split('.')[1];
       expect(floatingPointNumbers).toHaveLength(testedDecimalPlacesAmount);
     });
@@ -124,7 +124,7 @@ describe('exchange relative', () => {
       /rate/i
     );
 
-    await waitFor(() => expect(rate).toHaveValue('Current'));
+    await waitFor(() => expect(rate).toHaveValue('1.00000'));
   });
 });
 

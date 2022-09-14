@@ -1,3 +1,5 @@
+import React from 'react';
+
 import ExchangeRelativeSelect from '../components/ExchangeRelativeSelect';
 import ExchangeDateInput from '../components/ExchangeDateInput';
 import ShowFavoritesButton from '../components/ShowFavoritesButton';
