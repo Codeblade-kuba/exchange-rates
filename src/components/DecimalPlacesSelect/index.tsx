@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import settings from './data/settings';
+import { ReactComponent as VisibilityIcon } from '../../assets/icons/visibility.svg';
 
 const DecimalPlacesSelect = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
@@ -17,20 +18,23 @@ const DecimalPlacesSelect = () => {
   };
 
   return (
-    <div>
-      <select
-        id="decimal-places"
-        value={appState?.decimalPlaces}
-        onChange={changeExchangeRatesDecimalPlaces}
-      >
-        {settings.options.map((val, index) => (
-          <option value={index} key={index}>
-            {val}
-          </option>
-        ))}
-      </select>
-      <label htmlFor="decimal-places">Decimal places</label>
-    </div>
+    <>
+      <VisibilityIcon />
+      <div className="nav-item-action">
+        <label htmlFor="decimal-places">Decimal places:</label>
+        <select
+          id="decimal-places"
+          value={appState?.decimalPlaces}
+          onChange={changeExchangeRatesDecimalPlaces}
+        >
+          {settings.options.map((val, index) => (
+            <option value={index} key={index}>
+              {val}
+            </option>
+          ))}
+        </select>
+      </div>
+    </>
   );
 };
 

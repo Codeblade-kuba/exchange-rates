@@ -1,19 +1,50 @@
-.container {
-  max-width: 1620px;
-  margin-left: auto;
-  margin-right: auto;
+@import './functions';
+@import './mixins';
+@import './variables';
+@import './normalize';
+@import './general';
+
+#sorting-method {
+  display: none;
 }
 
-.exchange-rate-card {
-  border: 1px solid blue;
+.custom-select {
+  display: flex;
+  position: relative;
 }
 
-$red: pink;
-
-.exchange-rate-card.favorite {
-  border-color: $red;
+.custom-select-dropdown {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: translateY(100%);
+  padding: 0.25em 0;
+  margin-bottom: 0;
+  list-style-type: none;
+  background-color: $secondary;
+  border-radius: 0.5em;
+  opacity: 0;
+  &.open {
+    opacity: 1;
+  }
 }
-
-nav {
-  border-bottom: 1px solid green;
+.custom-select-option {
+  position: relative;
+  padding: 0.25em 0.75em;
+  cursor: pointer;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: $primary;
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.15s ease;
+  }
+  &:hover::before {
+    opacity: 1;
+  }
 }

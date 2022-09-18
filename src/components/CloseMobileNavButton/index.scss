@@ -1,0 +1,31 @@
+@import '../../styles/index.scss';
+
+.mobile-nav-close {
+  position: relative;
+  width: toEm(22);
+  height: toEm(22);
+  background-color: transparent;
+  border: none;
+  @include breakpoint-up(xxxl) {
+    display: none;
+  }
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: inline-block;
+    width: toEm(30);
+    height: toEm(2);
+    background-color: $primary;
+    box-shadow: 0 0 toEm(6) $primary;
+    translate: -50% -50%;
+  }
+  &::before {
+    rotate: 45deg;
+  }
+  &::after {
+    rotate: -45deg;
+  }
+}

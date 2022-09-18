@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import './index.scss';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
@@ -37,7 +38,7 @@ const ExchangeRateCards = () => {
   }, [currencies?.length, appState?.sortingMethod]);
 
   return (
-    <section data-testid="exchange-rate-cards">
+    <section className="exchange-rate-cards" data-testid="exchange-rate-cards">
       {sortedCurrencies?.map((currency, index) => {
         if (shouldRenderExchangeCard(currency))
           return <ExchangeRateCard key={index} currency={currency} />;

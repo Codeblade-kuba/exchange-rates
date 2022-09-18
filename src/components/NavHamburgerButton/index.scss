@@ -1,0 +1,33 @@
+@import '../../styles/index';
+
+.nav-hamburger-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: toEm(50);
+  height: toEm(50);
+  border-radius: 50%;
+  border: none;
+  background-color: $primary;
+  box-shadow: 0 0 toEm(10) $primary;
+  @include breakpoint-up(xxxl) {
+    display: none;
+  }
+  &::before,
+  &::after {
+    content: '';
+  }
+  &__dash {
+    margin: 0.366em 0;
+  }
+  &__dash,
+  &::before,
+  &::after {
+    width: toEm(30);
+    height: toEm(2);
+    border-radius: toEm(1);
+    background-color: $secondary;
+    box-shadow: 0 0 toEm(6) $secondary;
+  }
+}

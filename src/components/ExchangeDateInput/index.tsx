@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import appDefaultSettings from '../ExchangeRatesApp/data/appDefaultSettings';
+import { ReactComponent as SettingsIcon } from '../../assets/icons/settings.svg';
 
 const ExchangeDateInput = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
@@ -22,14 +23,17 @@ const ExchangeDateInput = () => {
 
   return (
     <>
-      <label htmlFor="exchange-date">Exchange date</label>
-      <input
-        id="exchange-date"
-        title="Choose exchange rates date"
-        type="date"
-        value={getValueIfDateIsValid(appState?.exchangeDateParam)}
-        onChange={(e) => changeExchangeDateParam(e)}
-      />
+      <SettingsIcon />
+      <div className="nav-item-action">
+        <label htmlFor="exchange-date">Date:</label>
+        <input
+          id="exchange-date"
+          title="Choose exchange rates date"
+          type="date"
+          value={getValueIfDateIsValid(appState?.exchangeDateParam)}
+          onChange={(e) => changeExchangeDateParam(e)}
+        />
+      </div>
     </>
   );
 };

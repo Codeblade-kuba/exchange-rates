@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import { ReactComponent as BuildIcon } from '../../assets/icons/build.svg';
 
 const ExchangeRelativeSelect = () => {
   const { appState, setAppState, currencies } = useContext(
@@ -17,24 +18,27 @@ const ExchangeRelativeSelect = () => {
 
   return (
     <>
-      <label htmlFor="exchange-relative">Relative currency</label>
-      <select
-        id="exchange-relative"
-        title="Choose exchange rates relative currency"
-        value={appState?.exchangeRelativeParam}
-        onChange={(e) => changeRelativeParam(e)}
-      >
-        {currencies?.map((currency, index) => (
-          <option
-            value={currency.symbol}
-            key={index}
-            label={currency.symbol}
-            data-testid={'exchange-relative-select-option-' + currency.symbol}
-          >
-            {currency.symbol}
-          </option>
-        ))}
-      </select>
+      <BuildIcon />
+      <div className="nav-item-action">
+        <label htmlFor="exchange-relative">Base:</label>
+        <select
+          id="exchange-relative"
+          title="Choose exchange rates relative currency"
+          value={appState?.exchangeRelativeParam}
+          onChange={(e) => changeRelativeParam(e)}
+        >
+          {currencies?.map((currency, index) => (
+            <option
+              value={currency.symbol}
+              key={index}
+              label={currency.symbol}
+              data-testid={'exchange-relative-select-option-' + currency.symbol}
+            >
+              {currency.symbol}
+            </option>
+          ))}
+        </select>
+      </div>
     </>
   );
 };

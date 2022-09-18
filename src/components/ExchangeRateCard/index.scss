@@ -1,0 +1,68 @@
+@import '../../styles/index';
+
+.exchange-rate-card {
+  --color-scheme: #{$primary};
+  position: relative;
+  padding: toEm(24);
+  border: toEm(3) solid var(--color-scheme);
+  border-radius: toEm(16);
+  box-shadow: 0 toEm(3) toEm(6) var(--color-scheme);
+  min-width: 0;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-scheme);
+    opacity: 0.2;
+    z-index: -1;
+  }
+  &.favorite {
+    --color-scheme: #ee456f;
+  }
+  header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2em;
+    h2 {
+      font-size: toEm(24);
+      margin: 0.085em 0 0;
+    }
+  }
+  .add-to-favorite {
+    padding: 0;
+    fill: var(--color-scheme);
+    background-color: transparent;
+    border: none;
+    margin-right: 0.75em;
+    opacity: 0.75;
+    cursor: pointer;
+    transition: scale 0.2s ease;
+    &:hover {
+      scale: 1.175;
+    }
+    svg {
+      display: block;
+      width: 1.66em;
+    }
+  }
+  .exchange-rate-card-infos {
+    display: flex;
+  }
+  .exchange-rate-card-symbol-wrapper {
+    width: 5em;
+  }
+  .exchange-rate-card-rate-wrapper {
+    flex: 1;
+  }
+  input {
+    width: 100%;
+    font-size: toEm(24);
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    color: $white;
+  }
+}

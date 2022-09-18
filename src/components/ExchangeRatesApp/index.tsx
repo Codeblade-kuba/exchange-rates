@@ -34,7 +34,7 @@ const ExchangeRatesApp = ({ children }: Props) => {
   const [appState, setAppState] =
     useState<AppStateInterface>(appDefaultSettings);
   const [currencies, setCurrencies] = useState<CurrencyInterface[]>();
-  const [error, setError] = useState<unknown>();
+  const [error, setError] = useState<unknown>(false);
 
   useEffect(() => {
     setInitialCurrencies();
@@ -119,20 +119,18 @@ const ExchangeRatesApp = ({ children }: Props) => {
   };
 
   return (
-    <div data-testid="exchange-rate-app">
-      <ExchangeRatesAppContext.Provider
-        value={{
-          currencies,
-          setCurrencies,
-          appState,
-          setAppState,
-          error,
-          setError,
-        }}
-      >
-        {children}
-      </ExchangeRatesAppContext.Provider>
-    </div>
+    <ExchangeRatesAppContext.Provider
+      value={{
+        currencies,
+        setCurrencies,
+        appState,
+        setAppState,
+        error,
+        setError,
+      }}
+    >
+      {children}
+    </ExchangeRatesAppContext.Provider>
   );
 };
 

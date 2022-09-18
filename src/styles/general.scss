@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+}
+
+body {
+  font-family: 'Nunito', sans-serif;
+  color: $white;
+  background-color: black;
+  background: $background url('../assets/images/background.jpg') no-repeat fixed
+    center;
+}
+
+a {
+  color: $primary;
+  text-decoration: none;
+}

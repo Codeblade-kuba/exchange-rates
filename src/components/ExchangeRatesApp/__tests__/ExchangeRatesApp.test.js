@@ -40,12 +40,6 @@ beforeEach(() => {
 });
 
 describe('render', () => {
-  it('ExchangeRatesApp should be rendered', () => {
-    renderExchangeRatesApp();
-    const exchangeRateCards = screen.getByTestId('exchange-rate-app');
-    expect(exchangeRateCards).toBeInTheDocument();
-  });
-
   it('ExchangeRateCard should be rendered in proper amount', async () => {
     renderExchangeRatesApp();
     const exchangeRateCardElements = await screen.findAllByRole('article');
