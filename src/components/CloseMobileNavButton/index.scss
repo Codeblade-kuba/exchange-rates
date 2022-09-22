@@ -6,6 +6,7 @@
   height: toEm(22);
   background-color: transparent;
   border: none;
+  margin-bottom: 1.5em;
   @include breakpoint-up(xxxl) {
     display: none;
   }

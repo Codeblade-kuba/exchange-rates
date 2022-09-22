@@ -10,7 +10,6 @@ const RatesSortingMethodSelect = () => {
   const sortingMethods = ['default', 'alphabetically', 'random'];
 
   const changeSortingMethod = (index: number) => {
-    if (!setAppState) return;
     setAppState((prev) => ({ ...prev, sortingMethod: sortingMethods[index] }));
   };
 
@@ -19,8 +18,9 @@ const RatesSortingMethodSelect = () => {
       <FilterListIcon />
       <div className="nav-item-action">
         <CustomSelect
+          id="sorting"
           label="Sorting"
-          initial={sortingMethods.indexOf('default')}
+          initial={sortingMethods.indexOf(appState.sortingMethod)}
           options={sortingMethods}
           callback={changeSortingMethod}
         />

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import CustomSelect from '../CustomSelect';
 import { ReactComponent as BuildIcon } from '../../assets/icons/build.svg';
 
 const ExchangeRelativeSelect = () => {
@@ -8,36 +9,42 @@ const ExchangeRelativeSelect = () => {
     ExchangeRatesAppContext
   );
 
-  const changeRelativeParam = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    if (!setAppState) return;
+  const changeRelativeParam = (index: number) => {
     setAppState((prev) => ({
       ...prev,
-      exchangeRelativeParam: e.target.value,
+      exchangeRelativeParam: currencies[index].symbol,
     }));
+  };
+
+  const getCurrencySymbols = () => {
+    const symbols: string[] = [];
+    currencies.forEach((currency) => {
+      symbols.push(currency.symbol);
+    });
+    return symbols;
+  };
+
+  const getIndexOfCurrencyWithSymbol = (symbol: string) => {
+    let foundIndex: number = -1;
+    currencies.forEach((currency, index) => {
+      if (currency.symbol === symbol) {
+        foundIndex = index;
+      }
+    });
+    return foundIndex;
   };
 
   return (
     <>
       <BuildIcon />
       <div className="nav-item-action">
-        <label htmlFor="exchange-relative">Base:</label>
-        <select
-          id="exchange-relative"
-          title="Choose exchange rates relative currency"
-          value={appState?.exchangeRelativeParam}
-          onChange={(e) => changeRelativeParam(e)}
-        >
-          {currencies?.map((currency, index) => (
-            <option
-              value={currency.symbol}
-              key={index}
-              label={currency.symbol}
-              data-testid={'exchange-relative-select-option-' + currency.symbol}
-            >
-              {currency.symbol}
-            </option>
-          ))}
-        </select>
+        <CustomSelect
+          id="base"
+          label="Base"
+          initial={getIndexOfCurrencyWithSymbol(appState.exchangeRelativeParam)}
+          options={getCurrencySymbols()}
+          callback={changeRelativeParam}
+        />
       </div>
     </>
   );

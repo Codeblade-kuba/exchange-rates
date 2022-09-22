@@ -14,8 +14,12 @@ describe('DecimalPlacesSelect', () => {
   it('should have proper initial value', () => {
     renderWithExchangeRatesAppContext(<DecimalPlacesSelect />);
     const decimalPlacesSelect = screen.getByLabelText(/decimal places/i);
-    expect(decimalPlacesSelect).toHaveValue(
-      appDefaultSettings.decimalPlaces.toString()
+    const decimalPlacesSelected = within(decimalPlacesSelect).getByRole(
+      'option',
+      { selected: true }
+    );
+    expect(decimalPlacesSelected).toHaveTextContent(
+      appDefaultSettings.decimalPlaces
     );
   });
 

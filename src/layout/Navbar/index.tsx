@@ -9,7 +9,6 @@ import ResetButton from '../../components/ResetButton';
 import CloseMobileNavButton from '../../components/CloseMobileNavButton';
 
 const componentsToIncludeInNav = [
-  <CloseMobileNavButton />,
   <ExchangeRelativeSelect />,
   <ExchangeDateInput />,
   <ShowFavoritesButton />,
@@ -21,6 +20,7 @@ const componentsToIncludeInNav = [
 const Navbar = () => {
   return (
     <nav className="navbar">
+      <CloseMobileNavButton />
       <ul className="navbar-list">
         {componentsToIncludeInNav.map((component, index) => (
           <li className="navbar-item" key={index}>

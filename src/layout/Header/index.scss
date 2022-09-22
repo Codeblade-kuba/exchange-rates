@@ -27,13 +27,12 @@
 }
 
 .main-header-title {
-  color: $primary;
-  font-weight: 800;
-  font-size: 1.25em;
-  text-shadow: 0 0 toEm(5);
-  @include breakpoint-up(xxxl) {
-    font-size: toEm(34);
-  }
+  margin: 0;
+}
+
+.main-header-logo {
+  height: 4rem;
+  box-shadow: 0 0 1rem $primary;
 }
 
 .navbar {
@@ -50,6 +49,7 @@
     transition: translate 0.25s ease;
   }
   @include breakpoint-up(xxxl) {
+    padding: 1.15em 1.875em;
     background-color: $primary;
     border-radius: 50rem;
     box-shadow: 0 0 1em $primary;
@@ -105,6 +105,7 @@
   flex: 1;
   display: flex;
   align-items: center;
+  cursor: pointer;
   input,
   select,
   button {
@@ -120,6 +121,35 @@
     appearance: none;
   }
   button {
+    cursor: pointer;
     font-weight: 600;
+  }
+}
+
+.skip-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  &:focus-within {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .skip-link {
+    display: inline-block;
+    padding: 0.5rem;
+    color: $primary;
+    background-color: $black;
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 1rem $primary;
+    }
+  }
+  .skip-link + .skip-link {
+    margin-left: 0.5rem;
   }
 }

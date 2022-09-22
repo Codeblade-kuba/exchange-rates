@@ -1,18 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
-interface Props {
-  label: string;
-  initial: number;
-  options: any[];
-  callback: (index: number) => void;
-}
+import PropsInterface from './types/Props';
+import './index.scss';
 
-const CustomSelect = ({ label, initial, options, callback }: Props) => {
+const CustomSelect = ({
+  id,
+  label,
+  initial,
+  options,
+  callback,
+}: PropsInterface) => {
   const [selected, setSelected] = useState<number>(initial);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const customSelect = useRef<HTMLDivElement>(null);
 
-  const toggleOpen = () => {
-    setIsOpen((prev) => !prev);
+  useEffect(() => {
+    setSelected(initial);
+  }, [initial]);
+
+  const openDropdown = () => {
+    if (isOpen) {
+      closeDropdown();
+      return;
+    }
+    setIsOpen(true);
+    window.addEventListener('click', clickHandle);
+  };
+
+  const closeDropdown = () => {
+    setIsOpen(false);
+  };
+
+  const clickHandle = (e: any) => {
+    if (customSelect.current?.contains(e.target)) {
+      return;
+    }
+    closeDropdown();
   };
 
   const setDropdownItem = (e: React.MouseEvent<HTMLLIElement>) => {
@@ -20,24 +43,31 @@ const CustomSelect = ({ label, initial, options, callback }: Props) => {
     let index = parseInt(target.dataset.index!);
 
     setSelected(index);
-    toggleOpen();
+    closeDropdown();
     callback(index);
   };
 
   return (
-    <div className="custom-select">
+    <div
+      className="custom-select"
+      data-testid="custom-select"
+      ref={customSelect}
+    >
       <button
         title="Open sorting method options"
         className="custom-select-button"
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}
-        onClick={toggleOpen}
+        onClick={openDropdown}
       >
-        <span className="custom-select-label">{label}:</span>
+        <span id={`#${id}-title`} className="custom-select-label">
+          {label}:
+        </span>
         <span className="custom-select-value">{options[selected]}</span>
       </button>
       <ul
+        aria-labelledby={`#${id}-title`}
         className={`custom-select-dropdown ${isOpen ? 'open' : ''}`}
         tabIndex={-1}
         role="listbox"

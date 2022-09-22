@@ -64,5 +64,8 @@
     border: none;
     background-color: transparent;
     color: $white;
+    &:focus-visible {
+      outline: none;
+    }
   }
 }

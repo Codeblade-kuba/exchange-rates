@@ -14,7 +14,6 @@ const AddToFavoritesButton = ({
   function toggleFavorite() {
     if (!setCurrencies) return;
     setCurrencies((prev) => {
-      if (!prev) return;
       const prevCopy = [...prev];
       prevCopy.forEach((prevCurrency) => {
         if (prevCurrency.symbol === currency.symbol) {

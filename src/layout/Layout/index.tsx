@@ -13,7 +13,7 @@ const Layout = ({ children }: Props) => {
   return (
     <div className="main-wrapper">
       <Header></Header>
-      <main>
+      <main id="content">
         <Container>{children}</Container>
       </main>
       <Footer></Footer>
