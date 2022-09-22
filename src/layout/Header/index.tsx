@@ -36,11 +36,13 @@ const Header = () => {
           <Container>
             <div className="main-header-wrapper">
               <h1 className="main-header-title">
-                <img
-                  className="main-header-logo"
-                  src={logo}
-                  alt="Logo of Exchange Rates"
-                />
+                <a href="/">
+                  <img
+                    className="main-header-logo"
+                    src={logo}
+                    alt="Logo of Exchange Rates"
+                  />
+                </a>
               </h1>
               <NavHamburgerButton />
               <Navbar />

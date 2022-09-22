@@ -1,6 +1,6 @@
 export default interface AppStateInterface {
   exchangeRelativeParam: string;
-  exchangeDateParam: string;
+  exchangeDateParam: Date;
   favorites: [];
   decimalPlaces: number;
   sortingMethod: string;

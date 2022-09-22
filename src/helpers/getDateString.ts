@@ -1,8 +1,7 @@
-const getDateString = () => {
-  let today: Date | string = new Date();
-  let dd: number | string = today.getDate();
-  let mm: number | string = today.getMonth() + 1;
-  const yyyy = today.getFullYear();
+const getDateString = (date = new Date()) => {
+  let dd: number | string = date.getDate();
+  let mm: number | string = date.getMonth() + 1;
+  const yyyy = date.getFullYear();
   if (dd < 10) {
     dd = `0${dd}`;
   }
@@ -10,8 +9,8 @@ const getDateString = () => {
   if (mm < 10) {
     mm = `0${mm}`;
   }
-  today = `${yyyy}-${mm}-${dd}`;
-  return today;
+  let dateString = `${yyyy}-${mm}-${dd}`;
+  return dateString;
 };
 
 export default getDateString;
