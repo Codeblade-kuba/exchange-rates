@@ -11,7 +11,7 @@
   border: none;
   background-color: $primary;
   box-shadow: 0 0 toEm(10) $primary;
-  @include breakpoint-up(xxxl) {
+  @include breakpoint-up($desktop-breakpoint) {
     display: none;
   }
   &::before,

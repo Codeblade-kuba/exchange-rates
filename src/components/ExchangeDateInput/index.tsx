@@ -6,21 +6,15 @@ import { ReactComponent as SettingsIcon } from '../../assets/icons/settings.svg'
 import getDateString from '../../helpers/getDateString';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import './index.scss';
 
 const ExchangeDateInput = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
 
-  // const changeExchangeDateParam = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (!setAppState) return;
-  //   setAppState((prev) => {
-  //     const valueToSet = e.target.value || appDefaultSettings.exchangeDateParam;
-  //     return { ...prev, exchangeDateParam: valueToSet };
-  //   });
-  // };
-
   const changeExchangeDateParam = (date: Date) => {
+    let dateToSet = date || new Date();
     setAppState((prev) => {
-      return { ...prev, exchangeDateParam: date };
+      return { ...prev, exchangeDateParam: dateToSet };
     });
   };
 

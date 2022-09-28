@@ -7,7 +7,7 @@
   background-color: transparent;
   border: none;
   margin-bottom: 1.5em;
-  @include breakpoint-up(xxxl) {
+  @include breakpoint-up($desktop-breakpoint) {
     display: none;
   }
   &::before,

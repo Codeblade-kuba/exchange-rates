@@ -3,12 +3,7 @@
 App to display in nice way exchange rates fetched from Frankfurter - free public API.
 
 Todo:
-[x] Close dropdown event listener
-[x] Remove outlines on inputs
-[x] Skip navbar link
-[x] Set initial date
-[x] No favorites info
-[x] Should round decimal places properly
+[ ] Inactive reset button
 
 Desired features:
 [x] Showing all exchange rates
