@@ -1,4 +1,4 @@
-import React from 'react';
+import './index.scss';
 
 import ExchangeRelativeSelect from '../../components/ExchangeRelativeSelect';
 import ExchangeDateInput from '../../components/ExchangeDateInput';
@@ -8,7 +8,7 @@ import RatesSortingMethodSelect from '../../components/RatesSortingMethodSelect'
 import ResetButton from '../../components/ResetButton';
 import CloseMobileNavButton from '../../components/CloseMobileNavButton';
 
-const componentsToIncludeInNav = [
+const navbarComponents = [
   <ExchangeRelativeSelect />,
   <ExchangeDateInput />,
   <ShowFavoritesButton />,
@@ -22,7 +22,7 @@ const Navbar = () => {
     <nav className="navbar">
       <CloseMobileNavButton />
       <ul className="navbar-list">
-        {componentsToIncludeInNav.map((component, index) => (
+        {navbarComponents.map((component, index) => (
           <li className="navbar-item" key={index}>
             {component}
           </li>

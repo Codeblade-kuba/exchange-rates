@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 import { ReactComponent as HeartIcon } from '../../assets/icons/favorite.svg';
 
@@ -12,7 +12,6 @@ const AddToFavoritesButton = ({
   const { setCurrencies } = useContext(ExchangeRatesAppContext);
 
   function toggleFavorite() {
-    if (!setCurrencies) return;
     setCurrencies((prev) => {
       const prevCopy = [...prev];
       prevCopy.forEach((prevCurrency) => {

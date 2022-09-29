@@ -1,26 +1,16 @@
-import React, { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
 import './index.scss';
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
-import { useMemo } from 'react';
-import { useCallback } from 'react';
-import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 
 const ExchangeRateCards = () => {
   const { appState, currencies } = useContext(ExchangeRatesAppContext);
 
-  const shouldRenderExchangeCard = (currency: CurrencyInterface) => {
-    if (appState?.showFavorites) {
-      if (currency.isFavorite) return true;
-      return false;
-    }
-    return true;
-  };
-
   const sortedCurrencies = useMemo(() => {
-    if (!currencies) return;
+    if (!currencies.length) return;
     let sortedCurrencies = [...currencies];
     switch (appState?.sortingMethod) {
       case 'alphabetically':

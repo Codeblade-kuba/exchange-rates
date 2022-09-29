@@ -1,6 +1,5 @@
-import React from 'react';
-
 import './index.scss';
+
 import Container from '../Container';
 import { ReactComponent as HeartIcon } from '../../assets/icons/favorite.svg';
 

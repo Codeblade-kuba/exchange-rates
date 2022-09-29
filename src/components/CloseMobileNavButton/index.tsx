@@ -1,13 +1,13 @@
 import { useContext } from 'react';
 
 import './index.scss';
-import { HeaderContext } from '../../contexts/HeaderContext';
+
+import HeaderContext from '../../contexts/HeaderContext';
 
 const CloseMobileNavButton = () => {
   const { setMobileNavActive } = useContext(HeaderContext);
 
   const toggleMobileNav = () => {
-    if (!setMobileNavActive) return;
     setMobileNavActive((prev) => !prev);
   };
 

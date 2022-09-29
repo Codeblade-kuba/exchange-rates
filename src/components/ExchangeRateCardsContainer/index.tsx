@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCards from '../ExchangeRateCards';
 import ErrorMessage from '../ErrorMessage';
 

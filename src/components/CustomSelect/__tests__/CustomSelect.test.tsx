@@ -1,7 +1,7 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import CustomSelect from '..';
-import PropsInterface from '../types/Props';
+import PropsInterface from '../interfaces/Props';
 
 const testingProps: PropsInterface = {
   id: 'test',

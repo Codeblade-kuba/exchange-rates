@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 
 import './index.scss';
-import { HeaderContext } from '../../contexts/HeaderContext';
+
+import HeaderContext from '../../contexts/HeaderContext';
 
 const NavHamburgerButton = () => {
   const { setMobileNavActive } = useContext(HeaderContext);

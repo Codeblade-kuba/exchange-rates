@@ -1,4 +1,4 @@
-export default interface AppStateInterface {
+interface AppStateInterface {
   exchangeRelativeParam: string;
   exchangeDateParam: Date;
   favorites: [];
@@ -7,3 +7,5 @@ export default interface AppStateInterface {
   showFavorites: boolean;
   reset: boolean;
 }
+
+export default AppStateInterface;

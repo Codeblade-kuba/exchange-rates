@@ -1,0 +1,100 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins.scss';
+
+.navbar {
+  font-size: 1.25em;
+  padding: 1.15em;
+  @include breakpoint-down($desktop-breakpoint) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(20rem, 90vw);
+    background-color: transparentize($secondary, 0.1);
+    translate: 100%;
+    transition: translate 0.25s ease;
+  }
+  @include breakpoint-up($desktop-breakpoint) {
+    padding: 1.15em 1.875em;
+    background-color: $primary;
+    border-radius: 50rem;
+    box-shadow: 0 0 1em $primary;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: toRem(18);
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparentize($black, 0.7),
+      transparent
+    );
+    @include breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.navbar-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  @include breakpoint-up($desktop-breakpoint) {
+    display: flex;
+  }
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  svg {
+    min-width: 1em;
+    width: 1em;
+    fill: $white;
+    margin-right: 0.5em;
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
+  & + & {
+    @include breakpoint-down($desktop-breakpoint) {
+      margin-top: 1em;
+    }
+    @include breakpoint-up($desktop-breakpoint) {
+      margin-left: 2em;
+    }
+  }
+}
+
+.nav-item-action {
+  display: flex;
+  align-items: center;
+  label {
+    margin-right: 0.33ch;
+  }
+  label,
+  input,
+  button {
+    color: $white;
+    background-color: transparent;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: text-shadow 0.3s ease;
+  }
+  *:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:hover {
+    label,
+    input,
+    button {
+      text-shadow: 0 0 0.25rem white;
+    }
+  }
+}

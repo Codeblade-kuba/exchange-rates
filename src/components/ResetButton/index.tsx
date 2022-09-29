@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import appDefaultSettings from '../ExchangeRatesApp/data/appDefaultSettings';
 import { ReactComponent as CachedIcon } from '../../assets/icons/cached.svg';
 

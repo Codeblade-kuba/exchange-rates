@@ -5,6 +5,7 @@ import {
   within,
   waitFor,
 } from '@testing-library/react';
+
 import ExchangeRatesApp from '..';
 import Layout from '../../../layout/Layout';
 import ExchangeRateCards from '../../ExchangeRateCards';
@@ -39,8 +40,12 @@ const exchangeRatesTestData = {
 };
 
 beforeEach(() => {
-  getCurrencyNames.mockImplementation(() => currencyNamesTestData);
-  getCurrenciesExchangeRates.mockImplementation(() => exchangeRatesTestData);
+  (getCurrencyNames as jest.Mock).mockImplementation(
+    () => currencyNamesTestData
+  );
+  (getCurrenciesExchangeRates as jest.Mock).mockImplementation(
+    () => exchangeRatesTestData
+  );
 });
 
 describe('render', () => {
@@ -92,7 +97,9 @@ describe('decimal places functionality', () => {
     );
     fireEvent.click(decimalPlacesOption);
 
-    const exchangeRates = await screen.findAllByLabelText(/rate/i);
+    const exchangeRates: HTMLInputElement[] = await screen.findAllByLabelText(
+      /rate/i
+    );
     exchangeRates.forEach((rate) => {
       if (rate.value === '1.00000') return false;
       const floatingPointNumbers = rate.value.split('.')[1];
@@ -109,7 +116,7 @@ describe('exchange relative', () => {
     const exchangeRelativeSelect = screen.getByLabelText(/base/i);
     await within(exchangeRelativeSelect).findAllByRole('option');
 
-    getCurrenciesExchangeRates.mockImplementation(() => ({
+    (getCurrenciesExchangeRates as jest.Mock).mockImplementation(() => ({
       AUD: null,
       BGN: 1.9558,
     }));
@@ -134,7 +141,7 @@ describe('exchange date', () => {
     renderExchangeRatesApp();
     const exchangeRelativeDateInput = screen.getByLabelText(/date/i);
 
-    getCurrenciesExchangeRates.mockImplementation(() => ({
+    (getCurrenciesExchangeRates as jest.Mock).mockImplementation(() => ({
       AUD: 1.6666,
       BGN: 1.7777,
     }));
@@ -205,7 +212,7 @@ describe('reset', () => {
       'option',
       { selected: true }
     );
-    expect(selectedDecimalOption).toHaveTextContent(5);
+    expect(selectedDecimalOption).toHaveTextContent('5');
 
     const selectedSortingOption = await within(sortingMethods).findByRole(
       'option',

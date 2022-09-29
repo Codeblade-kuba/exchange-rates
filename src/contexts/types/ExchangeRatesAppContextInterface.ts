@@ -1,7 +1,7 @@
 import AppStateInterface from '../../components/ExchangeRatesApp/interfaces/AppState';
 import CurrencyInterface from '../../components/ExchangeRatesApp/interfaces/Currency';
 
-export default interface ExchangeRatesAppContextInterface {
+interface ExchangeRatesAppContextInterface {
   currencies: CurrencyInterface[];
   setCurrencies: React.Dispatch<React.SetStateAction<CurrencyInterface[]>>;
   appState: AppStateInterface;
@@ -9,3 +9,5 @@ export default interface ExchangeRatesAppContextInterface {
   error?: unknown;
   setError?: React.Dispatch<React.SetStateAction<unknown>>;
 }
+
+export default ExchangeRatesAppContextInterface;

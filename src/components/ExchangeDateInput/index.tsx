@@ -1,12 +1,11 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
-import appDefaultSettings from '../ExchangeRatesApp/data/appDefaultSettings';
-import { ReactComponent as SettingsIcon } from '../../assets/icons/settings.svg';
-import getDateString from '../../helpers/getDateString';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import './index.scss';
+import 'react-datepicker/dist/react-datepicker.css';
+
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
+import { ReactComponent as SettingsIcon } from '../../assets/icons/settings.svg';
+import DatePicker from 'react-datepicker';
 
 const ExchangeDateInput = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);

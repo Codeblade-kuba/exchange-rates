@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ErrorMessage = ({ message }: { message: string }) => {
   return (
     <h2 className="alert" data-testid="error-message">

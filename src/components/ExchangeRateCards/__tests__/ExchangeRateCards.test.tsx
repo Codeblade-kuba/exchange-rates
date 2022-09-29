@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react';
+
 import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeRateCards from '..';
 

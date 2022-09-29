@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import PropsInterface from './types/Props';
 import './index.scss';
+
+import PropsInterface from './interfaces/Props';
 
 const CustomSelect = ({
   id,

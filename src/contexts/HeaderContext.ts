@@ -1,8 +1,10 @@
 import { createContext } from 'react';
 
-interface HeaderContextInterface {
-  mobileNavActive?: boolean;
-  setMobileNavActive?: React.Dispatch<React.SetStateAction<boolean>>;
-}
+import HeaderContextInterface from './types/HeaderContextInterface';
 
-export const HeaderContext = createContext<HeaderContextInterface>({});
+const HeaderContext = createContext<HeaderContextInterface>({
+  mobileNavActive: false,
+  setMobileNavActive: (state) => {},
+});
+
+export default HeaderContext;

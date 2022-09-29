@@ -1,4 +1,5 @@
 import { screen, within } from '@testing-library/react';
+
 import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import DecimalPlacesSelect from '..';
 import appDefaultSettings from '../../ExchangeRatesApp/data/appDefaultSettings';
@@ -19,7 +20,7 @@ describe('DecimalPlacesSelect', () => {
       { selected: true }
     );
     expect(decimalPlacesSelected).toHaveTextContent(
-      appDefaultSettings.decimalPlaces
+      appDefaultSettings.decimalPlaces.toString()
     );
   });
 

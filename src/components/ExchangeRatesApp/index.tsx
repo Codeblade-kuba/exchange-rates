@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import useNonInitialEffect from '../../hooks/useNonInitialEffect';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import appDefaultSettings from './data/appDefaultSettings';
 import getCurrenciesExchangeRates from '../../api/getCurrenciesExchangeRates';
 import getCurrencyNames from '../../api/getCurrencyNames';

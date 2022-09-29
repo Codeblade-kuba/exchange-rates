@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react';
+import { useContext } from 'react';
 
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import { ReactComponent as FilterListIcon } from '../../assets/icons/filter-list.svg';
 import CustomSelect from '../CustomSelect';
 

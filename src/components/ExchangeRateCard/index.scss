@@ -1,4 +1,5 @@
-@import '../../styles/index';
+@import '../../styles/variables';
+@import '../../styles/functions';
 
 .exchange-rate-card {
   --color-scheme: #{$primary};

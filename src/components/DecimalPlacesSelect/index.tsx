@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import CustomSelect from '../CustomSelect';
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import settings from './data/settings';
 import { ReactComponent as VisibilityIcon } from '../../assets/icons/visibility.svg';
 

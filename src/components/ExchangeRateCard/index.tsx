@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import './index.scss';
+
 import AddToFavoritesButton from '../AddToFavoritesButton';
-import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 
 const ExchangeRateCard = ({ currency }: { currency: CurrencyInterface }) => {
