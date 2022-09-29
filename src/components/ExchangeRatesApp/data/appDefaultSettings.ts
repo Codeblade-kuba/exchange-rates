@@ -2,7 +2,7 @@ import AppStateInterface from '../interfaces/AppState';
 
 const appDefaultSettings: AppStateInterface = {
   exchangeRelativeParam: 'EUR',
-  exchangeDateParam: 'latest',
+  exchangeDateParam: new Date(),
   favorites: [],
   decimalPlaces: 5,
   sortingMethod: 'default',

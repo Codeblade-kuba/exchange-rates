@@ -1,0 +1,15 @@
+@import '../../styles/index.scss';
+
+.container {
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@each $key, $value in $grid-breakpoints {
+  .container {
+    @media (min-width: #{$value}) {
+      max-width: map-get($container-max-widths, $key);
+    }
+  }
+}

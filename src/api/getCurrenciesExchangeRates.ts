@@ -1,11 +1,14 @@
 import buildAPIURL from '../helpers/buildAPIURL';
+import getDateString from '../helpers/getDateString';
 
 const getCurrenciesExchangeRates = async (
-  exchangeDateParam: string,
+  exchangeDateParam: Date,
   exchangeRelativeParam: string
 ) => {
+  let exchangeDateParamString = getDateString(exchangeDateParam);
+
   let exchangeRates = await fetch(
-    buildAPIURL(exchangeDateParam, exchangeRelativeParam)
+    buildAPIURL(exchangeDateParamString, exchangeRelativeParam)
   );
   if (!exchangeRates.ok)
     throw new Error('Error while fetching exchange rates...');

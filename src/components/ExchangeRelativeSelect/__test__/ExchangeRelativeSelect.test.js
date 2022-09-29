@@ -11,7 +11,7 @@ const testCurrencies = [
 describe('ExchangeRelativeSelect', () => {
   it('should be rendered', () => {
     renderWithExchangeRatesAppContext(<ExchangeRelativeSelect />);
-    const exchangeRelativeSelect = screen.getByLabelText(/relative currency/i);
+    const exchangeRelativeSelect = screen.getByLabelText(/base/i);
     expect(exchangeRelativeSelect).toBeInTheDocument();
   });
 
@@ -20,8 +20,12 @@ describe('ExchangeRelativeSelect', () => {
       appState: { exchangeRelativeParam: testCurrencies[0].symbol },
       currencies: testCurrencies,
     });
-    const exchangeRelativeSelect = screen.getByLabelText(/relative currency/i);
-    expect(exchangeRelativeSelect).toHaveValue('TEST1');
+    const exchangeRelativeSelect = screen.getByLabelText(/base/i);
+    const exchangeRelativeSelected = within(exchangeRelativeSelect).getByRole(
+      'option',
+      { selected: true }
+    );
+    expect(exchangeRelativeSelected).toHaveTextContent('TEST1');
   });
 
   it('should have all currencies options', () => {
@@ -29,7 +33,7 @@ describe('ExchangeRelativeSelect', () => {
       appState: { exchangeRelativeParam: testCurrencies[0].symbol },
       currencies: testCurrencies,
     });
-    const exchangeRelativeSelect = screen.getByLabelText(/relative currency/i);
+    const exchangeRelativeSelect = screen.getByLabelText(/base/i);
     const exchangeRelativeSelectOptions = within(
       exchangeRelativeSelect
     ).getAllByRole('option');

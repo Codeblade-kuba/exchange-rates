@@ -1,17 +1,18 @@
 import { screen } from '@testing-library/react';
 import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
 import ExchangeDateInput from '..';
+import getDateString from '../../../helpers/getDateString';
 
 describe('ExchangeDateInput', () => {
   it('should be rendered', () => {
     renderWithExchangeRatesAppContext(<ExchangeDateInput />);
-    const exchangeDateInput = screen.getByLabelText(/exchange date/i);
+    const exchangeDateInput = screen.getByLabelText(/date/i);
     expect(exchangeDateInput).toBeInTheDocument();
   });
 
-  it('should have empty initial value', () => {
+  it('should show proper initial value', () => {
     renderWithExchangeRatesAppContext(<ExchangeDateInput />);
-    const exchangeDateInput = screen.getByLabelText(/exchange date/i);
-    expect(exchangeDateInput).toHaveValue('');
+    const exchangeDateInput = screen.getByLabelText(/date/i);
+    expect(exchangeDateInput).toHaveValue(getDateString());
   });
 });

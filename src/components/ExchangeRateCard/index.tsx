@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import './index.scss';
 import AddToFavoritesButton from '../AddToFavoritesButton';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
@@ -13,9 +14,14 @@ const ExchangeRateCard = ({ currency }: { currency: CurrencyInterface }) => {
     return classes;
   };
 
-  const getFixedCurrencyRate = (currency: CurrencyInterface) => {
-    if (!currency || !currency.rate) return;
-    return currency.rate.toFixed(appState?.decimalPlaces);
+  const roundNumber = (number: number, decimalPlaces: number) => {
+    const modifier = Math.pow(10, decimalPlaces);
+    return Math.round(number * modifier) / modifier;
+  };
+
+  const getRoundedCurrencyRate = (currency: CurrencyInterface) => {
+    if (!currency.rate) return;
+    return roundNumber(currency.rate, appState.decimalPlaces);
   };
 
   return (
@@ -24,22 +30,25 @@ const ExchangeRateCard = ({ currency }: { currency: CurrencyInterface }) => {
         <AddToFavoritesButton currency={currency} />
         <h2>{currency.name}</h2>
       </header>
-      <section>
-        <div>
+      <section className="exchange-rate-card-infos">
+        <div className="exchange-rate-card-symbol-wrapper">
           <label htmlFor={`currency-${currency.symbol}-symbol`}>Symbol:</label>
           <input
+            className="exchange-rate-card-symbol"
             id={`currency-${currency.symbol}-symbol`}
             value={currency.symbol}
             type="text"
+            tabIndex={-1}
             readOnly
           />
         </div>
-        <div>
+        <div className="exchange-rate-card-rate-wrapper">
           <label htmlFor={`currency-${currency.symbol}-rate`}>Rate:</label>
           <input
             id={`currency-${currency.symbol}-rate`}
-            value={getFixedCurrencyRate(currency)}
+            value={getRoundedCurrencyRate(currency)}
             type="text"
+            tabIndex={-1}
             readOnly
           />
         </div>

@@ -27,9 +27,19 @@ const testCurrencies = [
 
 describe('ExchangeRateCards', () => {
   it('should be rendered', () => {
-    renderWithExchangeRatesAppContext(<ExchangeRateCards />);
+    renderWithExchangeRatesAppContext(<ExchangeRateCards />, {
+      currencies: testCurrencies,
+    });
     const exchangeRateCards = screen.getByTestId('exchange-rate-cards');
     expect(exchangeRateCards).toBeInTheDocument();
+  });
+
+  it('should render alert', () => {
+    renderWithExchangeRatesAppContext(<ExchangeRateCards />);
+    const noCurrenciesAlert = screen.getByText(
+      /there are no currencies to display/i
+    );
+    expect(noCurrenciesAlert).toBeInTheDocument();
   });
 
   it('instances should be rendered in good amount', () => {

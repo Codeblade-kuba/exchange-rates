@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './index.scss';
+
 interface Props {
   children: JSX.Element | JSX.Element[];
 }

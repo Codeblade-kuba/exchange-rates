@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useNonInitialEffect from '../../hooks/useNonInitialEffect';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import appDefaultSettings from './data/appDefaultSettings';
@@ -11,30 +12,11 @@ interface Props {
   children: JSX.Element | JSX.Element[];
 }
 
-const useNonInitialEffect = (
-  effect: React.EffectCallback,
-  deps?: React.DependencyList | undefined
-) => {
-  const initialRender = useRef(true);
-
-  useEffect(() => {
-    let effectReturns: void | (() => void) = () => {};
-    if (initialRender.current) {
-      initialRender.current = false;
-    } else {
-      effectReturns = effect();
-    }
-    if (effectReturns && typeof effectReturns === 'function') {
-      return effectReturns;
-    }
-  }, deps);
-};
-
 const ExchangeRatesApp = ({ children }: Props) => {
   const [appState, setAppState] =
     useState<AppStateInterface>(appDefaultSettings);
-  const [currencies, setCurrencies] = useState<CurrencyInterface[]>();
-  const [error, setError] = useState<unknown>();
+  const [currencies, setCurrencies] = useState<CurrencyInterface[]>([]);
+  const [error, setError] = useState<unknown>(false);
 
   useEffect(() => {
     setInitialCurrencies();
@@ -74,9 +56,6 @@ const ExchangeRatesApp = ({ children }: Props) => {
         appState.exchangeRelativeParam
       );
       setCurrencies((prev) => {
-        if (!prev) {
-          return undefined;
-        }
         let currencies: CurrencyInterface[] = [...prev];
         currencies = setCurrenciesExchangeRates(currencies, exchangeRates);
         return currencies;
@@ -119,20 +98,18 @@ const ExchangeRatesApp = ({ children }: Props) => {
   };
 
   return (
-    <div data-testid="exchange-rate-app">
-      <ExchangeRatesAppContext.Provider
-        value={{
-          currencies,
-          setCurrencies,
-          appState,
-          setAppState,
-          error,
-          setError,
-        }}
-      >
-        {children}
-      </ExchangeRatesAppContext.Provider>
-    </div>
+    <ExchangeRatesAppContext.Provider
+      value={{
+        currencies,
+        setCurrencies,
+        appState,
+        setAppState,
+        error,
+        setError,
+      }}
+    >
+      {children}
+    </ExchangeRatesAppContext.Provider>
   );
 };
 

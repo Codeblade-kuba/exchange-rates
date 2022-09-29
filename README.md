@@ -2,6 +2,9 @@
 
 App to display in nice way exchange rates fetched from Frankfurter - free public API.
 
+Todo:
+[ ] Inactive reset button
+
 Desired features:
 [x] Showing all exchange rates
 [x] Setting base currency

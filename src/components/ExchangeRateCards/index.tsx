@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import './index.scss';
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
@@ -34,17 +35,27 @@ const ExchangeRateCards = () => {
         break;
     }
     return sortedCurrencies;
-  }, [currencies?.length, appState?.sortingMethod]);
+  }, [currencies.length, appState.sortingMethod]);
 
-  return (
-    <section data-testid="exchange-rate-cards">
-      {sortedCurrencies?.map((currency, index) => {
-        if (shouldRenderExchangeCard(currency))
+  const getCurrenciesToDisplay = () => {
+    if (!appState?.showFavorites) return sortedCurrencies;
+    return sortedCurrencies?.filter((currency) => currency.isFavorite);
+  };
+
+  if (getCurrenciesToDisplay()?.length) {
+    return (
+      <section
+        className="exchange-rate-cards"
+        data-testid="exchange-rate-cards"
+      >
+        {getCurrenciesToDisplay()?.map((currency, index) => {
           return <ExchangeRateCard key={index} currency={currency} />;
-        return false;
-      })}
-    </section>
-  );
+        })}
+      </section>
+    );
+  } else {
+    return <h2 className="alert">There are no currencies to display...</h2>;
+  }
 };
 
 export default ExchangeRateCards;

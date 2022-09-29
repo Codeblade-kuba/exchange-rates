@@ -1,0 +1,17 @@
+@mixin breakpoint-up($breakpoint) {
+  @media screen and (min-width: map-get($grid-breakpoints, #{$breakpoint})) {
+    @content;
+  }
+}
+
+@mixin breakpoint-down($breakpoint) {
+  @media screen and (max-width: calc(#{map-get($grid-breakpoints, #{$breakpoint})} - 1px)) {
+    @content;
+  }
+}
+
+@mixin breakpoint-between($breakpoint1, $breakpoint2) {
+  @media screen and (min-width: map-get($grid-breakpoints, #{$breakpoint1})) and (max-width: calc(#{map-get($grid-breakpoints, #{$breakpoint2})} - 1px)) {
+    @content;
+  }
+}

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 
 import { ExchangeRatesAppContext } from '../../contexts/ExchangeRatesAppContext';
+import { ReactComponent as HeartIcon } from '../../assets/icons/favorite.svg';
 
 const ShowFavoritesButton = () => {
   const { appState, setAppState } = useContext(ExchangeRatesAppContext);
@@ -11,9 +12,14 @@ const ShowFavoritesButton = () => {
   };
 
   return (
-    <button onClick={toggleShowFavorites} title="Toggle favorites">
-      {(appState?.showFavorites ? 'Hide' : 'Show') + ' favorites'}
-    </button>
+    <>
+      <HeartIcon />
+      <div className="nav-item-action">
+        <button onClick={toggleShowFavorites} title="Toggle favorites">
+          {(appState?.showFavorites ? 'Hide' : 'Show') + ' favorites'}
+        </button>
+      </div>
+    </>
   );
 };
 

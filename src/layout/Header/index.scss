@@ -1,0 +1,157 @@
+@import '../../styles/index.scss';
+
+.main-header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  padding: 0.66em 0;
+  width: 100%;
+  margin-bottom: 1em;
+  z-index: 2;
+  @include breakpoint-up($desktop-breakpoint) {
+    padding: 1.25em 0;
+  }
+  &.mobile-nav-open {
+    .navbar {
+      @include breakpoint-down($desktop-breakpoint) {
+        translate: 0;
+      }
+    }
+  }
+}
+
+.main-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header-title {
+  margin: 0;
+}
+
+.main-header-logo {
+  display: block;
+  width: 4rem;
+  height: auto;
+  box-shadow: 0 0 1rem $primary;
+}
+
+.navbar {
+  font-size: 1.25em;
+  padding: 1.15em;
+  @include breakpoint-down($desktop-breakpoint) {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(20rem, 90vw);
+    background-color: transparentize($secondary, 0.1);
+    translate: 100%;
+    transition: translate 0.25s ease;
+  }
+  @include breakpoint-up($desktop-breakpoint) {
+    padding: 1.15em 1.875em;
+    background-color: $primary;
+    border-radius: 50rem;
+    box-shadow: 0 0 1em $primary;
+  }
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: toRem(18);
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparentize($black, 0.7),
+      transparent
+    );
+    @include breakpoint-up($desktop-breakpoint) {
+      display: none;
+    }
+  }
+}
+
+.navbar-list {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+  @include breakpoint-up($desktop-breakpoint) {
+    display: flex;
+  }
+}
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  svg {
+    min-width: 1em;
+    width: 1em;
+    fill: $white;
+    margin-right: 0.5em;
+  }
+  & + & {
+    @include breakpoint-down($desktop-breakpoint) {
+      margin-top: 1em;
+    }
+    @include breakpoint-up($desktop-breakpoint) {
+      margin-left: 2em;
+    }
+  }
+}
+
+.nav-item-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  input,
+  select,
+  button {
+    color: $white;
+    background-color: transparent;
+    border: none;
+  }
+  input,
+  select {
+    font-weight: 300;
+  }
+  select {
+    appearance: none;
+  }
+  button {
+    cursor: pointer;
+    font-weight: 600;
+  }
+}
+
+.skip-links {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 0.5rem;
+  z-index: 3;
+  opacity: 0;
+  pointer-events: none;
+  &:focus-within {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .skip-link {
+    display: inline-block;
+    padding: 0.5rem;
+    color: $primary;
+    background-color: $black;
+    &:hover,
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 1rem $primary;
+    }
+  }
+  .skip-link + .skip-link {
+    margin-left: 0.5rem;
+  }
+}
