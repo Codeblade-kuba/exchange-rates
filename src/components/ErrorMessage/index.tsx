@@ -2,9 +2,9 @@ import React from 'react';
 
 const ErrorMessage = ({ message }: { message: string }) => {
   return (
-    <div data-testid="error-message">
-      <strong>{message}</strong>
-    </div>
+    <h2 className="alert" data-testid="error-message">
+      {message}
+    </h2>
   );
 };
 

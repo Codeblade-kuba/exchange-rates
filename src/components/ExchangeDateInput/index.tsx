@@ -24,6 +24,7 @@ const ExchangeDateInput = () => {
       <div className="nav-item-action">
         <label htmlFor="exchange-date">Date:</label>
         <DatePicker
+          id="exchange-date"
           dateFormat="dd.MM.yyyy"
           selected={appState.exchangeDateParam}
           onChange={changeExchangeDateParam}

@@ -10,6 +10,8 @@ import Layout from '../../../layout/Layout';
 import ExchangeRateCards from '../../ExchangeRateCards';
 import getCurrencyNames from '../../../api/getCurrencyNames';
 import getCurrenciesExchangeRates from '../../../api/getCurrenciesExchangeRates';
+import getDateString from '../../../helpers/getDateString';
+import appDefaultSettings from '../data/appDefaultSettings';
 
 jest.mock('../../../api/getCurrencyNames');
 jest.mock('../../../api/getCurrenciesExchangeRates');
@@ -27,11 +29,13 @@ const renderExchangeRatesApp = () => {
 const currencyNamesTestData = {
   AUD: 'Australian Dollar',
   BGN: 'Bulgarian Lev',
+  EUR: 'Euro',
 };
 
 const exchangeRatesTestData = {
   AUD: 1.4748,
   BGN: 1.9558,
+  EUR: 1.5155,
 };
 
 beforeEach(() => {
@@ -148,23 +152,65 @@ describe('exchange date', () => {
 });
 
 describe('reset', () => {
+  it('should not be active initially', async () => {
+    renderExchangeRatesApp();
+
+    const resetButton = await screen.findByText(/reset/i);
+    await waitFor(() => expect(resetButton).toBeDisabled());
+  });
+  it('should be active after changed setting', async () => {
+    renderExchangeRatesApp();
+
+    const decimalPlaces = screen.getByLabelText(/decimal places/i);
+    fireEvent.click(within(decimalPlaces).getByText('3'));
+
+    const resetButton = await screen.findByText(/reset/i);
+    await waitFor(() => expect(resetButton).not.toBeDisabled());
+  });
   it('should reset all options', async () => {
     renderExchangeRatesApp();
+
+    const exchangeRelativeRateInput = screen.getByLabelText(/base/i);
+    fireEvent.click(await within(exchangeRelativeRateInput).findByText('BGN'));
+
     const exchangeRelativeDateInput = screen.getByLabelText(/date/i);
-
-    getCurrenciesExchangeRates.mockImplementation(() => ({
-      AUD: 1.6666,
-      BGN: 1.7777,
-    }));
-
     fireEvent.change(exchangeRelativeDateInput, {
       target: { value: '2022-01-01' },
     });
 
-    expect(getCurrenciesExchangeRates).toBeCalledTimes(1);
+    const showFavorites = screen.getByTitle(/toggle favorites/i);
+    fireEvent.click(showFavorites);
 
-    const exchangeRateCardElements = await screen.findAllByRole('article');
-    let rate = within(exchangeRateCardElements[0]).getByLabelText(/rate/i);
-    await waitFor(() => expect(rate).toHaveValue('1.6666'));
+    const decimalPlaces = screen.getByLabelText(/decimal places/i);
+    fireEvent.click(within(decimalPlaces).getByText('3'));
+
+    const sortingMethods = screen.getByLabelText(/sorting/i);
+    fireEvent.click(within(sortingMethods).getByText('random'));
+
+    const resetButton = screen.getByText(/reset/i);
+    fireEvent.click(resetButton);
+
+    const selectedRateOption = await within(
+      exchangeRelativeRateInput
+    ).findByRole('option', { selected: true });
+    expect(selectedRateOption).toHaveTextContent('EUR');
+
+    expect(exchangeRelativeDateInput).toHaveValue(
+      getDateString(appDefaultSettings.exchangeDateParam, '.', true)
+    );
+
+    expect(showFavorites).toHaveTextContent(/show favorites/i);
+
+    const selectedDecimalOption = await within(decimalPlaces).findByRole(
+      'option',
+      { selected: true }
+    );
+    expect(selectedDecimalOption).toHaveTextContent(5);
+
+    const selectedSortingOption = await within(sortingMethods).findByRole(
+      'option',
+      { selected: true }
+    );
+    expect(selectedSortingOption).toHaveTextContent('default');
   });
 });

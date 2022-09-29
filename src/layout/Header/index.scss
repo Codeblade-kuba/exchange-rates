@@ -92,6 +92,9 @@
     width: 1em;
     fill: $white;
     margin-right: 0.5em;
+    &.disabled {
+      opacity: 0.5;
+    }
   }
   & + & {
     @include breakpoint-down($desktop-breakpoint) {
@@ -104,27 +107,31 @@
 }
 
 .nav-item-action {
-  flex: 1;
   display: flex;
   align-items: center;
-  cursor: pointer;
+  label {
+    margin-right: 0.33ch;
+  }
+  label,
   input,
-  select,
   button {
     color: $white;
     background-color: transparent;
+    outline: none;
     border: none;
-  }
-  input,
-  select {
-    font-weight: 300;
-  }
-  select {
-    appearance: none;
-  }
-  button {
     cursor: pointer;
-    font-weight: 600;
+    transition: text-shadow 0.3s ease;
+  }
+  *:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  &:hover {
+    label,
+    input,
+    button {
+      text-shadow: 0 0 0.25rem white;
+    }
   }
 }
 

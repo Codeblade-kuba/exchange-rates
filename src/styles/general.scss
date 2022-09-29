@@ -10,17 +10,26 @@ img {
   max-width: 100%;
 }
 
+svg {
+  overflow: visible;
+}
+
 body {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Nunito', 'Helvetica', sans-serif;
   color: $white;
   background-color: black;
   background: $background url('../assets/images/background.jpg') no-repeat fixed
     center;
+  background-size: cover;
 }
 
 a {
   color: $primary;
   text-decoration: none;
+  transition: text-shadow 0.3s ease;
+  &:hover {
+    text-shadow: 0 0 1rem $primary;
+  }
 }
 
 .alert {

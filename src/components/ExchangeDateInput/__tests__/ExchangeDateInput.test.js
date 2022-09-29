@@ -13,6 +13,6 @@ describe('ExchangeDateInput', () => {
   it('should show proper initial value', () => {
     renderWithExchangeRatesAppContext(<ExchangeDateInput />);
     const exchangeDateInput = screen.getByLabelText(/date/i);
-    expect(exchangeDateInput).toHaveValue(getDateString());
+    expect(exchangeDateInput).toHaveValue(getDateString(new Date(), '.', true));
   });
 });
