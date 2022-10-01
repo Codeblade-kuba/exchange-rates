@@ -2,10 +2,11 @@ import { useContext, useMemo } from 'react';
 
 import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
+import ErrorMessage from '../ErrorMessage';
 import { shuffle } from '../../utils/shuffle';
 
 const ExchangeRateCards = (): JSX.Element => {
-  const { appState, currencies, isLoading } = useContext(
+  const { appState, currencies, isLoading, error } = useContext(
     ExchangeRatesAppContext
   );
 
@@ -37,6 +38,10 @@ const ExchangeRateCards = (): JSX.Element => {
   const getArrayWithLength = (length: number) => {
     return Array(length).fill(0);
   };
+
+  if (error && error instanceof Error) {
+    return <ErrorMessage message={error.message} />;
+  }
 
   if (getCurrenciesToDisplay().length) {
     return (
