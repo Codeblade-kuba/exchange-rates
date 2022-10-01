@@ -1,4 +1,4 @@
-export function shuffle(array) {
+export function shuffle(array: any[]) {
   var m = array.length,
     t,
     i;

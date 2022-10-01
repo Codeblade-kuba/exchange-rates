@@ -16,6 +16,7 @@ const ExchangeRatesApp = ({ children }: Props) => {
   const [appState, setAppState] =
     useState<AppStateInterface>(appDefaultSettings);
   const [currencies, setCurrencies] = useState<CurrencyInterface[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<unknown>(false);
 
   useEffect(() => {
@@ -29,6 +30,7 @@ const ExchangeRatesApp = ({ children }: Props) => {
   const setInitialCurrencies = async () => {
     const currencies = await getCurrencies();
     setCurrencies(currencies);
+    setIsLoading(false);
   };
 
   const setCurrenciesExchangeRates = (
@@ -104,6 +106,8 @@ const ExchangeRatesApp = ({ children }: Props) => {
         setCurrencies,
         appState,
         setAppState,
+        isLoading,
+        setIsLoading,
         error,
         setError,
       }}

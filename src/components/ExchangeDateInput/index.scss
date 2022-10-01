@@ -65,3 +65,10 @@
 .react-datepicker__navigation:hover ::before {
   border-color: $black;
 }
+
+.react-datepicker__day:hover,
+.react-datepicker__month-text:hover,
+.react-datepicker__quarter-text:hover,
+.react-datepicker__year-text:hover {
+  color: $secondary;
+}

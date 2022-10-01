@@ -4,10 +4,35 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  &:focus-visible {
+    outline-style: solid;
+    outline-color: $white;
+  }
+}
+
+::selection {
+  background-color: $primary;
+}
+
+html {
+  scroll-behavior: smooth;
+  &::-webkit-scrollbar-track {
+    background-color: $black;
+  }
+  &::-webkit-scrollbar {
+    background-color: $black;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $primary;
+  }
+  @supports (scrollbar-color: #{$primary} #{$black}) {
+    scrollbar-color: #{$primary} #{$black};
+  }
 }
 
 img {
   max-width: 100%;
+  height: auto;
 }
 
 svg {
@@ -18,8 +43,8 @@ body {
   font-family: 'Nunito', 'Helvetica', sans-serif;
   color: $white;
   background-color: black;
-  background: $background url('../assets/images/background.jpg') no-repeat fixed
-    center;
+  background: $background url('../assets/images/background.avif') no-repeat
+    fixed center;
   background-size: cover;
 }
 

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
-import './index.scss';
 import 'react-datepicker/dist/react-datepicker.css';
+import './index.scss';
 
 import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import { ReactComponent as SettingsIcon } from '../../assets/icons/settings.svg';
@@ -27,6 +27,7 @@ const ExchangeDateInput = () => {
           dateFormat="dd.MM.yyyy"
           selected={appState.exchangeDateParam}
           onChange={changeExchangeDateParam}
+          enableTabLoop={false}
         />
       </div>
     </>

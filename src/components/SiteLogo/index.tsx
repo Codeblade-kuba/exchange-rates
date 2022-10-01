@@ -8,6 +8,8 @@ const SiteLogo = () => {
           className="main-header-logo"
           src={logo}
           alt="Logo of Exchange Rates"
+          width="64"
+          height="64"
         />
       </a>
     </h1>

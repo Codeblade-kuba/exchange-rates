@@ -7,11 +7,12 @@ import { ReactComponent as HeartIcon } from '../../assets/icons/favorite.svg';
 const AddToFavoritesButton = ({
   currency,
 }: {
-  currency: CurrencyInterface;
+  currency?: CurrencyInterface;
 }) => {
   const { setCurrencies } = useContext(ExchangeRatesAppContext);
 
   function toggleFavorite() {
+    if (!currency) return;
     setCurrencies((prev) => {
       const prevCopy = [...prev];
       prevCopy.forEach((prevCurrency) => {

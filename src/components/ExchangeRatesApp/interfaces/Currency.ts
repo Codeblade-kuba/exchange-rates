@@ -1,6 +1,7 @@
 interface CurrencyInterface {
   name: string;
   symbol: string;
+  // TODO
   rate?: number;
   isFavorite: boolean;
 }

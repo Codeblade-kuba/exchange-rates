@@ -6,52 +6,76 @@ import AddToFavoritesButton from '../AddToFavoritesButton';
 import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 
-const ExchangeRateCard = ({ currency }: { currency: CurrencyInterface }) => {
+const ExchangeRateCard = ({ currency }: { currency?: CurrencyInterface }) => {
   const { appState } = useContext(ExchangeRatesAppContext);
 
-  const addClassesToExchangeRatesCard = (currency: CurrencyInterface) => {
-    let classes = 'exchange-rate-card';
-    if (currency.isFavorite) classes += ' favorite';
-    return classes;
-  };
+  const symbol = currency?.symbol || null;
+  const name = currency?.name || null;
+  const rate = currency?.rate || null;
+  const isFavorite = currency?.isFavorite || null;
 
   const roundNumber = (number: number, decimalPlaces: number) => {
     const modifier = Math.pow(10, decimalPlaces);
     return Math.round(number * modifier) / modifier;
   };
 
-  const getRoundedCurrencyRate = (currency: CurrencyInterface) => {
-    if (!currency.rate) return;
-    return roundNumber(currency.rate, appState.decimalPlaces);
+  const getRoundedCurrencyRate = (rate: number | null) => {
+    if (!rate) return;
+    return roundNumber(rate, appState.decimalPlaces);
+  };
+
+  const getCurrencySymbolElement = () => {
+    if (symbol) {
+      return (
+        <input
+          className="exchange-rate-card__value"
+          id={`currency-${symbol}-symbol`}
+          value={symbol}
+          type="text"
+          tabIndex={-1}
+          readOnly
+        />
+      );
+    } else {
+      return <div className="exchange-rate-card__value">{symbol}</div>;
+    }
+  };
+
+  const getCurrencyRateElement = () => {
+    if (rate) {
+      return (
+        <input
+          id={`currency-${symbol}-rate`}
+          className="exchange-rate-card__value"
+          value={getRoundedCurrencyRate(rate)}
+          type="text"
+          tabIndex={-1}
+          readOnly
+        />
+      );
+    } else {
+      return <div className="exchange-rate-card__value">{symbol}</div>;
+    }
   };
 
   return (
-    <article className={addClassesToExchangeRatesCard(currency)}>
-      <header>
+    <article
+      className={`exchange-rate-card ${
+        isFavorite ? 'exchange-rate-card--favorite' : ''
+      } ${!currency ? 'exchange-rate-card--skeleton' : ''}`}
+    >
+      <header className="exchange-rate-card__header">
         <AddToFavoritesButton currency={currency} />
-        <h2>{currency.name}</h2>
+        <h2 className="exchange-rate-card__title">{name}</h2>
       </header>
-      <section className="exchange-rate-card-infos">
-        <div className="exchange-rate-card-symbol-wrapper">
-          <label htmlFor={`currency-${currency.symbol}-symbol`}>Symbol:</label>
-          <input
-            className="exchange-rate-card-symbol"
-            id={`currency-${currency.symbol}-symbol`}
-            value={currency.symbol}
-            type="text"
-            tabIndex={-1}
-            readOnly
-          />
+      <section className="exchange-rate-card__content">
+        <div className="exchange-rate-card__info exchange-rate-card__info--symbol">
+          <label htmlFor={`currency-${symbol}-symbol`}>Symbol:</label>
+          {getCurrencySymbolElement()}
         </div>
-        <div className="exchange-rate-card-rate-wrapper">
-          <label htmlFor={`currency-${currency.symbol}-rate`}>Rate:</label>
-          <input
-            id={`currency-${currency.symbol}-rate`}
-            value={getRoundedCurrencyRate(currency)}
-            type="text"
-            tabIndex={-1}
-            readOnly
-          />
+        <div className="exchange-rate-card__info exchange-rate-card__info--rate">
+          <label htmlFor={`currency-${symbol}-rate`}>Rate:</label>
+          {getCurrencyRateElement()}
         </div>
       </section>
     </article>

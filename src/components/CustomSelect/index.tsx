@@ -56,7 +56,7 @@ const CustomSelect = ({
     >
       <button
         title="Open sorting method options"
-        className="custom-select-button"
+        className={`custom-select-button ${id}`}
         type="button"
         aria-haspopup="listbox"
         aria-expanded={isOpen}

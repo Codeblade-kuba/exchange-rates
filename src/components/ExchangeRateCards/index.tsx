@@ -5,12 +5,15 @@ import './index.scss';
 import ExchangeRatesAppContext from '../../contexts/ExchangeRatesAppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import { shuffle } from '../../utils/shuffle';
+import CurrencyInterface from '../ExchangeRatesApp/interfaces/Currency';
 
 const ExchangeRateCards = () => {
-  const { appState, currencies } = useContext(ExchangeRatesAppContext);
+  const { appState, currencies, isLoading } = useContext(
+    ExchangeRatesAppContext
+  );
 
   const sortedCurrencies = useMemo(() => {
-    if (!currencies.length) return;
+    if (!currencies.length) return currencies;
     let sortedCurrencies = [...currencies];
     switch (appState?.sortingMethod) {
       case 'alphabetically':
@@ -25,21 +28,38 @@ const ExchangeRateCards = () => {
         break;
     }
     return sortedCurrencies;
-  }, [currencies.length, appState.sortingMethod]);
+  }, [currencies, appState.sortingMethod]);
 
   const getCurrenciesToDisplay = () => {
-    if (!appState?.showFavorites) return sortedCurrencies;
-    return sortedCurrencies?.filter((currency) => currency.isFavorite);
+    if (!appState.showFavorites) {
+      return sortedCurrencies;
+    }
+    return sortedCurrencies.filter((currency) => currency.isFavorite);
   };
 
-  if (getCurrenciesToDisplay()?.length) {
+  const getArrayWithLength = (length: number) => {
+    return Array(length).fill(0);
+  };
+
+  if (getCurrenciesToDisplay().length) {
     return (
       <section
         className="exchange-rate-cards"
         data-testid="exchange-rate-cards"
       >
-        {getCurrenciesToDisplay()?.map((currency, index) => {
+        {getCurrenciesToDisplay().map((currency, index) => {
           return <ExchangeRateCard key={index} currency={currency} />;
+        })}
+      </section>
+    );
+  } else if (isLoading) {
+    return (
+      <section
+        className="exchange-rate-cards"
+        data-testid="exchange-rate-cards"
+      >
+        {getArrayWithLength(16).map((value, index) => {
+          return <ExchangeRateCard key={index} />;
         })}
       </section>
     );

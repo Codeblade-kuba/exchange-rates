@@ -6,6 +6,8 @@ interface ExchangeRatesAppContextInterface {
   setCurrencies: React.Dispatch<React.SetStateAction<CurrencyInterface[]>>;
   appState: AppStateInterface;
   setAppState: React.Dispatch<React.SetStateAction<AppStateInterface>>;
+  isLoading?: boolean;
+  setIsLoading?: React.Dispatch<React.SetStateAction<boolean>>;
   error?: unknown;
   setError?: React.Dispatch<React.SetStateAction<unknown>>;
 }

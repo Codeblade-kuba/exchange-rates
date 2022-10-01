@@ -1,4 +1,4 @@
-import API_URL from '../data/constants';
+import { API_URL } from '../data/constants';
 
 const buildAPIURL = (URI: string, relativeParam: string | null = null) => {
   let builtURL = API_URL + '/' + URI;

@@ -5,6 +5,12 @@
   position: relative;
   .custom-select-button {
     cursor: pointer;
+    &.base .custom-select-value {
+      min-width: 3.33ch;
+    }
+  }
+  .custom-select-value {
+    display: inline-block;
   }
   .custom-select-label {
     margin-right: 0.25em;
