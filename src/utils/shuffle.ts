@@ -1,4 +1,4 @@
-export function shuffle(array: any[]) {
+export const shuffle = (array: any[]): any[] => {
   var m = array.length,
     t,
     i;
@@ -15,4 +15,4 @@ export function shuffle(array: any[]) {
   }
 
   return array;
-}
+};

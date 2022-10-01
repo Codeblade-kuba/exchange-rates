@@ -1,5 +1,5 @@
-import AppStateInterface from '../../components/ExchangeRatesApp/interfaces/AppState';
-import CurrencyInterface from '../../components/ExchangeRatesApp/interfaces/Currency';
+import AppStateInterface from '../../components/ExchangeRatesApp/types/AppState';
+import CurrencyInterface from '../../components/ExchangeRatesApp/types/Currency';
 
 interface ExchangeRatesAppContextInterface {
   currencies: CurrencyInterface[];

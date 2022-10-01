@@ -1,4 +1,4 @@
-import AppStateInterface from '../interfaces/AppState';
+import AppStateInterface from '../types/AppState';
 
 const appDefaultSettings: AppStateInterface = {
   exchangeRelativeParam: 'EUR',
