@@ -6,6 +6,11 @@
     App to track popular currencies exchange rates with pleasant design.
   </p>
 
+  <h3>Live</h3>
+  <p>
+    <a href="https://codeblade-kuba.github.io/exchange-rates/">codeblade-kuba.github.io/exchange-rates/</a>
+  </p>
+
   <h3>Technologies</h3>
   <p>
     <img alt="Typescript logo" src="./assets/images/typescript.svg" width="30">
