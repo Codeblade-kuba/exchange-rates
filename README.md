@@ -1,63 +1,29 @@
-# Exchange rates tracker app
+<div align="center">
+  <img alt="Exchange Rates logo" src="./assets/images/logo.svg" width="70">
 
-App to display in nice way exchange rates fetched from Frankfurter - free public API.
+  <h1>Exchange Rates</h1>
+  <p>
+    App to track popular currencies exchange rates with pleasant design.
+  </p>
 
-Desired features:
-[x] Showing all exchange rates
-[x] Setting base currency
-[x] Showing exchange rate in given period of time
-[x] Favorite exchange rates system
-[x] Changing decimal position
-[x] Sorting exchange rates
-[x] Reset whole app
+  <h3>Technologies:</h3>
+  <p>
+    <img alt="Typescript logo" src="./assets/images/typescript.svg" width="30">
+    <img alt="React logo" src="./assets/images/react.svg" width="30">
+    <img alt="SASS logo" src="./assets/images/sass.svg" width="30">
+    <img alt="Jest logo" src="./assets/images/jest.svg" width="30">
+  </p>
 
-layout
--- Head
--- Header
--- -- Logo
--- -- SkipLinks
--- Navbar
--- -- CloseMobileNavButton
--- -- NavHamburgerButton
--- Footer
--- Layout
-components
--- ui
--- -- CustomSelect
--- -- Container
--- -- ErrorMessage
--- app
--- -- ExchangeRatesApp
--- -- ExchangeRateCards
--- -- ExchangeRateCard
--- -- -- AddToFavoritesButton
--- appSettings
--- -- DecimalPlacesSelect
--- -- RatesSortingMethodSelect
--- -- ExchangeRelativeSelect
--- -- ExchangeDateInput
--- -- DecimalPlacesSelect
--- -- ResetButton
-
-Container
-Header
-Footer
-Layout
-Navbar
-AddToFavoritesButton
-CloseMobileNavButton
-CustomSelect
-DecimalPlacesSelect
-ErrorMessage
-ExchangeDateInput
-ExchangeRateCard
-ExchangeRateCards
-ExchangeRatesApp
-ExchangeRelativeSelect
-Head
-NavHamburgerButton
-RatesSortingMethodSelect
-ResetButton
-ShowFavoritesButton
-SiteLogo
-SkipLinks
+  <h3>Third party</h3>
+  <p>
+    <a href="https://create-react-app.dev/">Create React App</a>
+    <br>
+    <a href="https://github.com/nfl/react-helmet">React Helmet</a>
+    <br>
+    <a href="https://reactdatepicker.com/">React Datepicker</a>
+    <br>
+    <a href="https://testing-library.com/">React Testing Library</a>
+    <br>
+    <a href="https://www.frankfurter.app">Frankfurter API</a>
+  </p>
+</div>
