@@ -30,6 +30,8 @@
     border-radius: 0.5em;
     opacity: 0;
     visibility: hidden;
+    z-index: 1;
+    box-shadow: 0 0 1rem $primary;
     transition: opacity 0.15s ease;
     &.open {
       visibility: visible;

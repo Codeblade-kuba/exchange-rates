@@ -43,6 +43,23 @@ body {
   font-family: 'Nunito', 'Helvetica', sans-serif;
   color: $white;
   background-color: $background;
+  &::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: $black;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.2s ease;
+  }
+  &.no-scroll::after {
+    opacity: 0.5;
+    visibility: visible;
+  }
 }
 
 a {
@@ -56,4 +73,8 @@ a {
 
 .alert {
   text-align: center;
+}
+
+.no-scroll {
+  overflow-y: hidden;
 }

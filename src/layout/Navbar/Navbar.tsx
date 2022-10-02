@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 
 import HeaderContext from '../../contexts/HeaderContext';
 import NavHamburgerButton from './NavHamburgerButton';
@@ -7,6 +7,15 @@ import NavbarItems from './data/NavbarItems';
 
 const Navbar = (): JSX.Element => {
   const { mobileNavActive } = useContext(HeaderContext);
+
+  useEffect(() => {
+    const body = document.querySelector('body')!;
+    if (mobileNavActive) {
+      body.classList.add('no-scroll');
+    } else {
+      body.classList.remove('no-scroll');
+    }
+  }, [mobileNavActive]);
 
   const getNavbarClasses = () => {
     let classes = 'navbar';
