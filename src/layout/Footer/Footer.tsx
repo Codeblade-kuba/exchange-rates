@@ -1,4 +1,4 @@
-import Container from '../Container';
+import Container from '../../components/ui/Container';
 import { ReactComponent as HeartIcon } from '../../assets/icons/favorite.svg';
 
 const Footer = (): JSX.Element => {

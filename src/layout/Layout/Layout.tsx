@@ -1,6 +1,6 @@
 import Header from '../Header';
 import Footer from '../Footer';
-import Container from '../Container';
+import Container from '../../components/ui/Container';
 
 const Layout = ({
   children,

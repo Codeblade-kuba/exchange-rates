@@ -1,9 +1,9 @@
-import Head from '../components/Head';
-import ExchangeRatesApp from '../components/ExchangeRatesApp';
+import Head from '../common/Head';
+import ExchangeRatesApp from '../components/app/ExchangeRatesApp';
 import Layout from '../layout/Layout';
-import ExchangeRateCardsContainer from '../components/ExchangeRateCardsContainer';
+import ExchangeRateCards from '../components/app/ExchangeRateCards';
 
-const Home: React.FC = (): JSX.Element => {
+const Home = (): JSX.Element => {
   return (
     <>
       <Head
@@ -12,7 +12,7 @@ const Home: React.FC = (): JSX.Element => {
       />
       <ExchangeRatesApp>
         <Layout>
-          <ExchangeRateCardsContainer />
+          <ExchangeRateCards />
         </Layout>
       </ExchangeRatesApp>
     </>

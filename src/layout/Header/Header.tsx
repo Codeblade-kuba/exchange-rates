@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import HeaderContext from '../../contexts/HeaderContext';
-import Container from '../Container';
-import SkipLinks from '../../components/SkipLinks';
-import SiteLogo from '../../components/SiteLogo/SiteLogo';
+import Container from '../../components/ui/Container';
+import SkipLinks from './SkipLinks';
+import Logo from '../../components/ui/Logo';
 import Navbar from '../Navbar';
-import NavHamburgerButton from '../../components/NavHamburgerButton';
+import NavHamburgerButton from '../Navbar/NavHamburgerButton';
 
 const Header = (): JSX.Element => {
   const [mobileNavActive, setMobileNavActive] = useState(false);
@@ -27,8 +27,7 @@ const Header = (): JSX.Element => {
       <header className={getHeaderClassNames()}>
         <Container>
           <div className="main-header-wrapper">
-            <SiteLogo />
-            <NavHamburgerButton />
+            <Logo />
             <Navbar />
           </div>
         </Container>

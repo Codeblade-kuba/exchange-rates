@@ -1,6 +1,6 @@
 import { createContext } from 'react';
 
-import appDefaultSettings from '../components/ExchangeRatesApp/data/appDefaultSettings';
+import appDefaultSettings from '../components/app/ExchangeRatesApp/data/appDefaultSettings';
 import ExchangeRatesAppContextInterface from './types/ExchangeRatesAppContextInterface';
 
 const ExchangeRatesAppContext = createContext<ExchangeRatesAppContextInterface>(

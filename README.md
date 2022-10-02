@@ -10,3 +10,54 @@ Desired features:
 [x] Changing decimal position
 [x] Sorting exchange rates
 [x] Reset whole app
+
+layout
+-- Head
+-- Header
+-- -- Logo
+-- -- SkipLinks
+-- Navbar
+-- -- CloseMobileNavButton
+-- -- NavHamburgerButton
+-- Footer
+-- Layout
+components
+-- ui
+-- -- CustomSelect
+-- -- Container
+-- -- ErrorMessage
+-- app
+-- -- ExchangeRatesApp
+-- -- ExchangeRateCards
+-- -- ExchangeRateCard
+-- -- -- AddToFavoritesButton
+-- appSettings
+-- -- DecimalPlacesSelect
+-- -- RatesSortingMethodSelect
+-- -- ExchangeRelativeSelect
+-- -- ExchangeDateInput
+-- -- DecimalPlacesSelect
+-- -- ResetButton
+
+Container
+Header
+Footer
+Layout
+Navbar
+AddToFavoritesButton
+CloseMobileNavButton
+CustomSelect
+DecimalPlacesSelect
+ErrorMessage
+ExchangeDateInput
+ExchangeRateCard
+ExchangeRateCards
+ExchangeRatesApp
+ExchangeRelativeSelect
+Head
+NavHamburgerButton
+RatesSortingMethodSelect
+ResetButton
+ShowFavoritesButton
+SiteLogo
+SkipLinks
