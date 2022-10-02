@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/exchange-rates/static/css/main.7df0943c.css",
-    "main.js": "/exchange-rates/static/js/main.74372732.js",
+    "main.css": "/exchange-rates/static/css/main.4468faf7.css",
+    "main.js": "/exchange-rates/static/js/main.559bb8f6.js",
     "static/media/background.jpg": "/exchange-rates/static/media/background.493f3c45fcc6439c2a21.jpg",
     "static/media/background.webp": "/exchange-rates/static/media/background.2f1456c0fd438b6bfc0b.webp",
-    "static/media/background.avif": "/exchange-rates/static/media/background.9443853a0902bda944b5.avif",
+    "static/media/background.avif": "/exchange-rates/static/media/background.bcce590a22c304355d0c.avif",
     "static/media/logo.svg": "/exchange-rates/static/media/logo.67650e476d20a88a5b9f64ef8cc966df.svg",
     "static/media/settings.svg": "/exchange-rates/static/media/settings.3f5c4a2a23c3e4a935a4236e4cbad14c.svg",
     "index.html": "/exchange-rates/index.html",
@@ -13,11 +13,11 @@
     "static/media/build.svg": "/exchange-rates/static/media/build.4ec48a5934bcea91cc150b6474bfddd4.svg",
     "static/media/favorite.svg": "/exchange-rates/static/media/favorite.75f6801decae0412f2c37c1bb9b77f85.svg",
     "static/media/filter-list.svg": "/exchange-rates/static/media/filter-list.217805750317b144706bc69a060becf0.svg",
-    "main.7df0943c.css.map": "/exchange-rates/static/css/main.7df0943c.css.map",
-    "main.74372732.js.map": "/exchange-rates/static/js/main.74372732.js.map"
+    "main.4468faf7.css.map": "/exchange-rates/static/css/main.4468faf7.css.map",
+    "main.559bb8f6.js.map": "/exchange-rates/static/js/main.559bb8f6.js.map"
   },
   "entrypoints": [
-    "static/css/main.7df0943c.css",
-    "static/js/main.74372732.js"
+    "static/css/main.4468faf7.css",
+    "static/js/main.559bb8f6.js"
   ]
 }
