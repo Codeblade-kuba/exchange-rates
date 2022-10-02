@@ -5,7 +5,7 @@ const SkipLinks = (): JSX.Element => {
     <div className="skip-links">
       {skipLinksData.map((skipLink) => {
         return (
-          <a className="skip-link" href={'#' + skipLink.id}>
+          <a className="skip-link" href={'#' + skipLink.id} key={skipLink.id}>
             Skip to {skipLink.name}
           </a>
         );

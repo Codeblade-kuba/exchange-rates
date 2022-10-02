@@ -54,7 +54,12 @@ const ExchangeRateCards = (): JSX.Element => {
         data-testid="exchange-rate-cards"
       >
         {getCurrenciesToDisplay().map((currency, index) => {
-          return <ExchangeRateCard key={index} currency={currency} />;
+          return (
+            <ExchangeRateCard
+              key={currency.symbol || index}
+              currency={currency}
+            />
+          );
         })}
       </section>
     );
