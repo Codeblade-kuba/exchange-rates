@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/exchange-rates/static/css/main.c178c95e.css",
+    "main.css": "/exchange-rates/static/css/main.a67d74b1.css",
     "main.js": "/exchange-rates/static/js/main.b2a1e6cf.js",
     "static/media/background.jpg": "/exchange-rates/static/media/background.493f3c45fcc6439c2a21.jpg",
     "static/media/background.webp": "/exchange-rates/static/media/background.2f1456c0fd438b6bfc0b.webp",
@@ -13,11 +13,11 @@
     "static/media/build.svg": "/exchange-rates/static/media/build.4ec48a5934bcea91cc150b6474bfddd4.svg",
     "static/media/favorite.svg": "/exchange-rates/static/media/favorite.75f6801decae0412f2c37c1bb9b77f85.svg",
     "static/media/filter-list.svg": "/exchange-rates/static/media/filter-list.217805750317b144706bc69a060becf0.svg",
-    "main.c178c95e.css.map": "/exchange-rates/static/css/main.c178c95e.css.map",
+    "main.a67d74b1.css.map": "/exchange-rates/static/css/main.a67d74b1.css.map",
     "main.b2a1e6cf.js.map": "/exchange-rates/static/js/main.b2a1e6cf.js.map"
   },
   "entrypoints": [
-    "static/css/main.c178c95e.css",
+    "static/css/main.a67d74b1.css",
     "static/js/main.b2a1e6cf.js"
   ]
 }
