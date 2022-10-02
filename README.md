@@ -6,7 +6,7 @@
     App to track popular currencies exchange rates with pleasant design.
   </p>
 
-  <h3>Technologies:</h3>
+  <h3>Technologies</h3>
   <p>
     <img alt="Typescript logo" src="./assets/images/typescript.svg" width="30">
     <img alt="React logo" src="./assets/images/react.svg" width="30">
