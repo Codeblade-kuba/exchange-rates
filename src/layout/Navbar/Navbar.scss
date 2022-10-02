@@ -57,6 +57,7 @@
   align-items: center;
   font-weight: 600;
   svg {
+    display: block;
     min-width: 1em;
     width: 1em;
     fill: $white;
