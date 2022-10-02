@@ -42,16 +42,7 @@ svg {
 body {
   font-family: 'Nunito', 'Helvetica', sans-serif;
   color: $white;
-  background-image: image-set(
-    '../assets/images/background.avif' type('image/avif'),
-    '../assets/images/background.avif' type('image/webp'),
-    '../assets/images/background.jpg' type('image/jpeg')
-  );
   background-color: $background;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
-  background-size: cover;
 }
 
 a {

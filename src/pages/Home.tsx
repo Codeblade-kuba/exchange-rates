@@ -2,6 +2,7 @@ import Head from '../common/Head';
 import ExchangeRatesApp from '../components/app/ExchangeRatesApp';
 import Layout from '../layout/Layout';
 import ExchangeRateCards from '../components/app/ExchangeRateCards';
+import Background from '../components/ui/Background';
 
 const Home = (): JSX.Element => {
   return (
@@ -15,6 +16,7 @@ const Home = (): JSX.Element => {
           <ExchangeRateCards />
         </Layout>
       </ExchangeRatesApp>
+      <Background />
     </>
   );
 };
