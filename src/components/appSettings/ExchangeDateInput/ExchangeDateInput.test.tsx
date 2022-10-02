@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react';
 
-import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithAppContext';
 import ExchangeDateInput from '.';
 import getDateString from '../../../helpers/getDateString';
 

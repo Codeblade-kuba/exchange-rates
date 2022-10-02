@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import appDefaultSettings from '../../app/ExchangeRatesApp/data/appDefaultSettings';
 import { ReactComponent as CachedIcon } from '../../../assets/icons/cached.svg';
 
@@ -11,9 +11,8 @@ const ResetButton = (): JSX.Element => {
   useEffect(() => {
     if (appState === appDefaultSettings) {
       setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
     }
+    setIsDisabled(false);
   }, [appState]);
 
   const resetSettings = () => {

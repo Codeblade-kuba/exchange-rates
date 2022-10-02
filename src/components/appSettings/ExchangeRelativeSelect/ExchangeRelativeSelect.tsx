@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import CustomSelect from '../../ui/CustomSelect';
 import { ReactComponent as BuildIcon } from '../../../assets/icons/build.svg';
 

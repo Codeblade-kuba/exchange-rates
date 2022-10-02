@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import ExchangeRateCard from '../ExchangeRateCard';
 import ErrorMessage from '../../ui/ErrorMessage';
 import { shuffle } from '../../../utils/shuffle';
@@ -9,6 +9,7 @@ const ExchangeRateCards = (): JSX.Element => {
   const { appState, currencies, isLoading, error } = useContext(
     ExchangeRatesAppContext
   );
+  const skeletonCardsAmount = 16;
 
   const sortedCurrencies = useMemo(() => {
     if (!currencies.length) return currencies;
@@ -29,6 +30,9 @@ const ExchangeRateCards = (): JSX.Element => {
   }, [currencies, appState.sortingMethod]);
 
   const getCurrenciesToDisplay = () => {
+    if (isLoading) {
+      return getArrayWithLength(skeletonCardsAmount);
+    }
     if (!appState.showFavorites) {
       return sortedCurrencies;
     }
@@ -51,17 +55,6 @@ const ExchangeRateCards = (): JSX.Element => {
       >
         {getCurrenciesToDisplay().map((currency, index) => {
           return <ExchangeRateCard key={index} currency={currency} />;
-        })}
-      </section>
-    );
-  } else if (isLoading) {
-    return (
-      <section
-        className="exchange-rate-cards"
-        data-testid="exchange-rate-cards"
-      >
-        {getArrayWithLength(16).map((value, index) => {
-          return <ExchangeRateCard key={index} />;
         })}
       </section>
     );

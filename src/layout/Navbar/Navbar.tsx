@@ -1,29 +1,26 @@
-import NavHamburgerButton from './NavHamburgerButton';
-import ExchangeRelativeSelect from '../../components/appSettings/ExchangeRelativeSelect';
-import ExchangeDateInput from '../../components/appSettings/ExchangeDateInput';
-import ShowFavoritesButton from '../../components/appSettings/ShowFavoritesButton';
-import DecimalPlacesSelect from '../../components/appSettings/DecimalPlacesSelect';
-import RatesSortingMethodSelect from '../../components/appSettings/RatesSortingMethodSelect';
-import ResetButton from '../../components/appSettings/ResetButton';
-import CloseMobileNavButton from './CloseMobileNavButton';
+import { useContext } from 'react';
 
-const navbarComponents = [
-  <ExchangeRelativeSelect />,
-  <ExchangeDateInput />,
-  <ShowFavoritesButton />,
-  <DecimalPlacesSelect />,
-  <RatesSortingMethodSelect />,
-  <ResetButton />,
-];
+import HeaderContext from '../../contexts/HeaderContext';
+import NavHamburgerButton from './NavHamburgerButton';
+import CloseMobileNavButton from './CloseMobileNavButton';
+import NavbarItems from './data/NavbarItems';
 
 const Navbar = (): JSX.Element => {
+  const { mobileNavActive } = useContext(HeaderContext);
+
+  const getNavbarClasses = () => {
+    let classes = 'navbar';
+    if (mobileNavActive) classes += ' navbar--active';
+    return classes;
+  };
+
   return (
     <>
       <NavHamburgerButton />
-      <nav className="navbar">
+      <nav className={getNavbarClasses()}>
         <CloseMobileNavButton />
         <ul className="navbar-list">
-          {navbarComponents.map((component, index) => (
+          {NavbarItems.map((component, index) => (
             <li className="navbar-item" key={index}>
               {component}
             </li>

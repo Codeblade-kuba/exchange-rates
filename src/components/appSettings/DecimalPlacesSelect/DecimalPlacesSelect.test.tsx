@@ -1,6 +1,6 @@
 import { screen, within } from '@testing-library/react';
 
-import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithAppContext';
 import DecimalPlacesSelect from '.';
 import appDefaultSettings from '../../app/ExchangeRatesApp/data/appDefaultSettings';
 import settings from './data/settings';

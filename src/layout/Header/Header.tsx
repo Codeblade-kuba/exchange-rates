@@ -5,16 +5,9 @@ import Container from '../../components/ui/Container';
 import SkipLinks from './SkipLinks';
 import Logo from '../../components/ui/Logo';
 import Navbar from '../Navbar';
-import NavHamburgerButton from '../Navbar/NavHamburgerButton';
 
 const Header = (): JSX.Element => {
   const [mobileNavActive, setMobileNavActive] = useState(false);
-
-  const getHeaderClassNames = () => {
-    let className = 'main-header';
-    if (mobileNavActive) className += ' mobile-nav-open';
-    return className;
-  };
 
   return (
     <HeaderContext.Provider
@@ -24,9 +17,9 @@ const Header = (): JSX.Element => {
       }}
     >
       <SkipLinks />
-      <header className={getHeaderClassNames()}>
+      <header className="main-header">
         <Container>
-          <div className="main-header-wrapper">
+          <div className="main-header__wrapper">
             <Logo />
             <Navbar />
           </div>

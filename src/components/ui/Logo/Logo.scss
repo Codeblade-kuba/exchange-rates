@@ -1,0 +1,13 @@
+@import '../../../styles/variables.scss';
+
+.logo {
+  &__heading {
+    margin: 0;
+  }
+  &__image {
+    display: block;
+    width: 4rem;
+    height: auto;
+    box-shadow: 0 0 1rem $primary;
+  }
+}

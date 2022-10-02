@@ -1,0 +1,20 @@
+.add-to-favorite {
+  padding: 0;
+  fill: var(--color-scheme);
+  background-color: transparent;
+  border: none;
+  margin-right: 0.75em;
+  opacity: 0.75;
+  cursor: pointer;
+  outline: none;
+  transition: scale 0.2s ease;
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    scale: 1.175;
+  }
+  svg {
+    display: block;
+    width: 1.66em;
+  }
+}

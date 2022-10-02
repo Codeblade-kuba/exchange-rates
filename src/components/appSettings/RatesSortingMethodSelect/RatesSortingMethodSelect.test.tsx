@@ -1,6 +1,6 @@
 import { screen, within } from '@testing-library/react';
 
-import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithAppContext';
 import RatesSortingMethodSelect from '.';
 
 describe('RatesSortingMethodSelect', () => {

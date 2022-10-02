@@ -36,6 +36,11 @@
       display: none;
     }
   }
+  &--active {
+    @include breakpoint-down($desktop-breakpoint) {
+      translate: 0;
+    }
+  }
 }
 
 .navbar-list {

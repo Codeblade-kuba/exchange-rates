@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import { ReactComponent as SettingsIcon } from '../../../assets/icons/settings.svg';
 import DatePicker from 'react-datepicker';
 

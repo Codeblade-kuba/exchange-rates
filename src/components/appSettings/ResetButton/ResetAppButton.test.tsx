@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react';
-import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithAppContext';
 import ResetButton from '.';
 
 describe('ResetButton', () => {

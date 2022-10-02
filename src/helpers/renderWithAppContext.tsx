@@ -1,13 +1,13 @@
 import { render } from '@testing-library/react';
 
-import ExchangeRatesAppContext from '../contexts/ExchangeRatesAppContext';
-import ExchangeRatesAppContextInterface from '../contexts/types/ExchangeRatesAppContextInterface';
+import AppContext from '../contexts/AppContext';
+import AppContextType from '../contexts/types/AppContext';
 import appDefaultSettings from '../components/app/ExchangeRatesApp/data/appDefaultSettings';
 import AppStateInterface from '../components/app/ExchangeRatesApp/types/AppState';
 import CurrencyInterface from '../components/app/ExchangeRatesApp/types/Currency';
 
-const renderWithExchangeRatesAppContext = (component: any, props?: object) => {
-  const defaultProps: ExchangeRatesAppContextInterface = {
+const renderWithAppContext = (component: any, props?: object) => {
+  const defaultProps: AppContextType = {
     currencies: [],
     appState: appDefaultSettings,
     error: null,
@@ -18,10 +18,8 @@ const renderWithExchangeRatesAppContext = (component: any, props?: object) => {
   const propsToPass = { ...defaultProps, ...props };
 
   return render(
-    <ExchangeRatesAppContext.Provider value={propsToPass}>
-      {component}
-    </ExchangeRatesAppContext.Provider>
+    <AppContext.Provider value={propsToPass}>{component}</AppContext.Provider>
   );
 };
 
-export default renderWithExchangeRatesAppContext;
+export default renderWithAppContext;

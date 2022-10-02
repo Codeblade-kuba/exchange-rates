@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import CustomSelect from '../../ui/CustomSelect';
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import settings from './data/settings';
 import { ReactComponent as VisibilityIcon } from '../../../assets/icons/visibility.svg';
 

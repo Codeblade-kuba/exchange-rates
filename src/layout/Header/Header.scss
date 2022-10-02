@@ -12,28 +12,9 @@
   @include breakpoint-up($desktop-breakpoint) {
     padding: 1.25em 0;
   }
-  &.mobile-nav-open {
-    .navbar {
-      @include breakpoint-down($desktop-breakpoint) {
-        translate: 0;
-      }
-    }
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-}
-
-.main-header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.main-header-title {
-  margin: 0;
-}
-
-.main-header-logo {
-  display: block;
-  width: 4rem;
-  height: auto;
-  box-shadow: 0 0 1rem $primary;
 }

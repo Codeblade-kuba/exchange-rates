@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 
 import AddToFavoritesButton from './AddToFavoritesButton';
-import ExchangeRatesAppContext from '../../../contexts/ExchangeRatesAppContext';
+import ExchangeRatesAppContext from '../../../contexts/AppContext';
 import CurrencyType from '../ExchangeRatesApp/types/Currency';
+import roundNumber from '../../../utils/roundNumber';
 
 const ExchangeRateCard = ({
   currency,
@@ -15,11 +16,6 @@ const ExchangeRateCard = ({
   const name = currency?.name || null;
   const rate = currency?.rate || null;
   const isFavorite = currency?.isFavorite || null;
-
-  const roundNumber = (number: number, decimalPlaces: number) => {
-    const modifier = Math.pow(10, decimalPlaces);
-    return Math.round(number * modifier) / modifier;
-  };
 
   const getRoundedCurrencyRate = (rate: number | null) => {
     if (!rate) return;
@@ -60,12 +56,15 @@ const ExchangeRateCard = ({
     }
   };
 
+  const getExchageCardClasses = () => {
+    let classes = 'exchange-rate-card';
+    if (isFavorite) classes += ' exchange-rate-card--favorite';
+    if (!currency) classes += ' exchange-rate-card--skeleton';
+    return classes;
+  };
+
   return (
-    <article
-      className={`exchange-rate-card ${
-        isFavorite ? 'exchange-rate-card--favorite' : ''
-      } ${!currency ? 'exchange-rate-card--skeleton' : ''}`}
-    >
+    <article className={getExchageCardClasses()}>
       <header className="exchange-rate-card__header">
         <AddToFavoritesButton currency={currency} />
         <h2 className="exchange-rate-card__title">{name}</h2>

@@ -1,12 +1,15 @@
+import skipLinksData from './data/SkipLinksData';
+
 const SkipLinks = (): JSX.Element => {
   return (
     <div className="skip-links">
-      <a className="skip-link" href="#content">
-        Go to content
-      </a>
-      <a className="skip-link" href="#footer">
-        Go to footer
-      </a>
+      {skipLinksData.map((skipLink) => {
+        return (
+          <a className="skip-link" href={'#' + skipLink.id}>
+            Skip to {skipLink.name}
+          </a>
+        );
+      })}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { within, screen } from '@testing-library/react';
 
-import renderWithExchangeRatesAppContext from '../../../helpers/renderWithExchangeRatesAppContext';
+import renderWithExchangeRatesAppContext from '../../../helpers/renderWithAppContext';
 import ExchangeRelativeSelect from '.';
 
 const testCurrencies = [
