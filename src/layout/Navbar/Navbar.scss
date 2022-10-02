@@ -1,5 +1,6 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins.scss';
+@import '../../styles/functions.scss';
 
 .navbar {
   font-size: 1.25em;
@@ -61,14 +62,17 @@
     min-width: 1em;
     width: 1em;
     fill: $white;
-    margin-right: 0.5em;
+    margin-right: 1em;
+    @include breakpoint-up($desktop-breakpoint) {
+      margin-right: 0.5em;
+    }
     &.disabled {
       opacity: 0.5;
     }
   }
   & + & {
     @include breakpoint-down($desktop-breakpoint) {
-      margin-top: 1em;
+      margin-top: 1.5em;
     }
     @include breakpoint-up($desktop-breakpoint) {
       margin-left: 2em;
@@ -91,6 +95,7 @@
     border: none;
     cursor: pointer;
     transition: text-shadow 0.3s ease;
+    padding: 0;
   }
   *:disabled {
     opacity: 0.5;

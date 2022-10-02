@@ -8,7 +8,7 @@
   height: toEm(22);
   background-color: transparent;
   border: none;
-  margin-bottom: 1.5em;
+  margin-bottom: 2em;
   @include breakpoint-up($desktop-breakpoint) {
     display: none;
   }
